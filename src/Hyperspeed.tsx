@@ -58,8 +58,8 @@ interface HyperspeedProps {
 }
 
 const defaultOptions: HyperspeedOptions = {
-  onSpeedUp: () => {},
-  onSlowDown: () => {},
+  onSpeedUp: () => { },
+  onSlowDown: () => { },
   distortion: 'turbulentDistortion',
   length: 400,
   roadWidth: 10,
@@ -150,11 +150,11 @@ const distortions: Distortions = {
       const uAmp = mountainUniforms.uAmp.value;
       const distortion = new THREE.Vector3(
         Math.cos(progress * Math.PI * uFreq.x + time) * uAmp.x -
-          Math.cos(movementProgressFix * Math.PI * uFreq.x + time) * uAmp.x,
+        Math.cos(movementProgressFix * Math.PI * uFreq.x + time) * uAmp.x,
         nsin(progress * Math.PI * uFreq.y + time) * uAmp.y -
-          nsin(movementProgressFix * Math.PI * uFreq.y + time) * uAmp.y,
+        nsin(movementProgressFix * Math.PI * uFreq.y + time) * uAmp.y,
         nsin(progress * Math.PI * uFreq.z + time) * uAmp.z -
-          nsin(movementProgressFix * Math.PI * uFreq.z + time) * uAmp.z
+        nsin(movementProgressFix * Math.PI * uFreq.z + time) * uAmp.z
       );
       const lookAtAmp = new THREE.Vector3(2, 2, 2);
       const lookAtOffset = new THREE.Vector3(0, 0, -5);
@@ -182,9 +182,9 @@ const distortions: Distortions = {
       const uAmp = xyUniforms.uAmp.value;
       const distortion = new THREE.Vector3(
         Math.cos(progress * Math.PI * uFreq.x + time) * uAmp.x -
-          Math.cos(movementProgressFix * Math.PI * uFreq.x + time) * uAmp.x,
+        Math.cos(movementProgressFix * Math.PI * uFreq.x + time) * uAmp.x,
         Math.sin(progress * Math.PI * uFreq.y + time + Math.PI / 2) * uAmp.y -
-          Math.sin(movementProgressFix * Math.PI * uFreq.y + time + Math.PI / 2) * uAmp.y,
+        Math.sin(movementProgressFix * Math.PI * uFreq.y + time + Math.PI / 2) * uAmp.y,
         0
       );
       const lookAtAmp = new THREE.Vector3(2, 0.4, 1);
@@ -213,9 +213,9 @@ const distortions: Distortions = {
       const uAmp = LongRaceUniforms.uAmp.value;
       const distortion = new THREE.Vector3(
         Math.sin(progress * Math.PI * uFreq.x + time) * uAmp.x -
-          Math.sin(camProgress * Math.PI * uFreq.x + time) * uAmp.x,
+        Math.sin(camProgress * Math.PI * uFreq.x + time) * uAmp.x,
         Math.sin(progress * Math.PI * uFreq.y + time) * uAmp.y -
-          Math.sin(camProgress * Math.PI * uFreq.y + time) * uAmp.y,
+        Math.sin(camProgress * Math.PI * uFreq.y + time) * uAmp.y,
         0
       );
       const lookAtAmp = new THREE.Vector3(1, 1, 0);
@@ -532,7 +532,7 @@ class CarLights {
       )
     });
 
-    material.onBeforeCompile = shader => {
+    material.onBeforeCompile = (shader: any) => {
       shader.vertexShader = shader.vertexShader.replace(
         '#include <getDistortion_vertex>',
         typeof this.options.distortion === 'object' ? this.options.distortion.getDistortion : ''
@@ -662,7 +662,7 @@ class LightsSticks {
       )
     });
 
-    material.onBeforeCompile = shader => {
+    material.onBeforeCompile = (shader: any) => {
       shader.vertexShader = shader.vertexShader.replace(
         '#include <getDistortion_vertex>',
         typeof this.options.distortion === 'object' ? this.options.distortion.getDistortion : ''
@@ -798,7 +798,7 @@ class Road {
       )
     });
 
-    material.onBeforeCompile = shader => {
+    material.onBeforeCompile = (shader: any) => {
       shader.vertexShader = shader.vertexShader.replace(
         '#include <getDistortion_vertex>',
         typeof this.options.distortion === 'object' ? this.options.distortion.getDistortion : ''

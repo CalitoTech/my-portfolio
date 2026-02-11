@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react"
-import { motion, MotionProps, useInView } from "motion/react"
+import { motion, useInView } from "motion/react"
+import type { MotionProps } from "motion/react"
 
 import { cn } from "@/lib/utils"
 

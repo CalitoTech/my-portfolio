@@ -1,7 +1,6 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { BlurFade } from "@/components/ui/blur-fade";
-import { MagicCard } from "@/components/ui/magic-card";
 import { ShineBorder } from "@/components/ui/shine-border";
 import { motion, AnimatePresence } from "motion/react";
 import {
@@ -21,6 +20,7 @@ interface SubProject {
   image: string;
   logo: string;
   stack: string[];
+  url?: string;
 }
 
 interface Project {
@@ -37,7 +37,7 @@ interface Project {
   logos?: string[]; // Para el marquee de "Otros"
   image: string;
   shineColor: string[];
-  icon: JSX.Element;
+  icon: React.ReactNode;
   subProjects?: SubProject[];
 }
 
@@ -107,7 +107,8 @@ const experiences: Project[] = [
         details: "Digitalización total de procesos de inscripción y comunicación administrativa mediante WhatsApp API y flujos automatizados con N8N, eliminando procesos manuales y optimizando la atención al representante.",
         image: "/src/assets/fermin-proyecto.png",
         logo: "/src/assets/logo-fermin.png",
-        stack: ["N8N", "WhatsApp API", "Javascript"]
+        stack: ["N8N", "WhatsApp API", "Javascript"],
+        url: "https://sistema.uefermintoroaraure.com"
       },
       {
         title: "OLEICA C.A.",
@@ -289,12 +290,24 @@ const Experience = () => {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="space-y-4">
                               <p className="text-slate-400 font-light leading-relaxed">{sub.details}</p>
-                              <div className="flex flex-wrap gap-2 pt-2">
-                                {sub.stack.map(tech => (
-                                  <span key={tech} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400">
-                                    {tech}
-                                  </span>
-                                ))}
+                              <div className="flex flex-wrap items-center gap-4 pt-2">
+                                <div className="flex flex-wrap gap-2">
+                                  {sub.stack.map(tech => (
+                                    <span key={tech} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                                      {tech}
+                                    </span>
+                                  ))}
+                                </div>
+                                {sub.url && (
+                                  <a
+                                    href={sub.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white hover:text-blue-400 transition-colors group/link"
+                                  >
+                                    Ver Sistema <ExternalLink className="w-3 h-3 transition-transform group-hover/link:translate-x-1" />
+                                  </a>
+                                )}
                               </div>
                             </div>
                             <div
