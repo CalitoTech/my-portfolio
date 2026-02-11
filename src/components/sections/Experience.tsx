@@ -13,6 +13,18 @@ import {
   ExternalLink
 } from "lucide-react";
 
+// Import images and logos
+import logoCrediagro from "../../assets/logo-crediagro.png";
+import imgCrediagro from "../../assets/crediagro-proyecto.png";
+import logoAgroo from "../../assets/logo-agroo.png";
+import imgAgroo from "../../assets/agroo-proyecto.png";
+import logoCorpoeureka from "../../assets/logo-corpoeureka.png";
+import imgCorpoeureka from "../../assets/corpoeureka-proyecto.png";
+import logoFermin from "../../assets/logo-fermin.png";
+import imgFermin from "../../assets/fermin-proyecto.png";
+import logoOleica from "../../assets/logo-oleica3.png";
+import imgOleica from "../../assets/oleica-proyecto.jpg";
+
 // Define the type for better DX
 interface SubProject {
   title: string;
@@ -52,8 +64,8 @@ const experiences: Project[] = [
     details: "Como arquitecto fundador, lideré la creación de la infraestructura que hoy permite a más de 250,000 productores acceder a financiamiento sin intereses. Materialicé la visión de 'Agrooberto', un asistente virtual vía WhatsApp que digitalizó el 100% del proceso crediticio, eliminando barreras de liquidez y burocracia. Este ecosistema no solo ha bancarizado a sectores desatendidos, sino que ha impulsado un incremento del 30% en las transacciones de tiendas aliadas, redefiniendo la economía del agro en Venezuela.",
     tags: ["Financial Inclusion", "Scalable Fintech", "Agrooberto AI"],
     stack: ["N8N", "React Native", "NextJS", "Odoo", "OWL", "Python", "PostgreSQL"],
-    logo: "/src/assets/logo-crediagro.png",
-    image: "/src/assets/crediagro-proyecto.png",
+    logo: logoCrediagro,
+    image: imgCrediagro,
     shineColor: ["#22c55e", "#16a34a"], // Green
     icon: <Star className="w-5 h-5 text-green-400" />
   },
@@ -67,8 +79,8 @@ const experiences: Project[] = [
     details: "Lideré la ingeniería detrás de los productos de mayor tracción del ecosistema: desde el motor transaccional de Comercio Agroo hasta la creación de Agrooberto, el primer asistente inteligente vía WhatsApp con IA cognitiva. Mi rol se centró en el escalamiento de nuevos verticales y la arquitectura de Agroo AI, transformando la interacción con el productor mediante flujos digitales de alto rendimiento y garantizando la viabilidad técnica de cada lanzamiento disruptivo de la marca.",
     tags: ["Product Innovation", "Conversational IA", "E-Commerce Engines"],
     stack: ["N8N", "React Native", "NextJS", "Odoo", "OWL", "AI Cognitive", "Python"],
-    logo: "/src/assets/logo-agroo.png",
-    image: "/src/assets/agroo-proyecto.png",
+    logo: logoAgroo,
+    image: imgAgroo,
     shineColor: ["#3b82f6", "#2563eb"], // Blue
     icon: <Star className="w-5 h-5 text-blue-400" />
   },
@@ -82,8 +94,8 @@ const experiences: Project[] = [
     details: "En Corpoeureka, mi enfoque principal es el desarrollo y mantenimiento de módulos críticos dentro de Odoo, garantizando la estabilidad y eficiencia de los procesos de negocio. Gracias a los resultados obtenidos en proyectos como Agroo y Crediagro, mis aportes técnicos suelen servir como referencia para la implementación de nuevas funcionalidades. Me dedico a la resolución de problemas complejos de lógica y a colaborar en el saneamiento estructural del código, aportando una visión proactiva que ayuda a elevar los estándares regionales de la firma.",
     tags: ["Odoo Development", "FullStack", "Logic Solving"],
     stack: ["Odoo", "Jasper Studios", "OWL", "Python", "PostgreSQL", "XML", "API Integration"],
-    logo: "/src/assets/logo-corpoeureka.png",
-    image: "/src/assets/corpoeureka-proyecto.png",
+    logo: logoCorpoeureka,
+    image: imgCorpoeureka,
     shineColor: ["#a855f7", "#7c3aed"], // Purple
     icon: <Star className="w-5 h-5 text-purple-400" />
   },
@@ -96,25 +108,25 @@ const experiences: Project[] = [
     details: "Este espacio reúne proyectos clave donde he aplicado mi conocimiento para resolver problemas específicos en los sectores educativo e industrial, desde la automatización de procesos administrativos con N8N hasta la transformación digital de la salud ocupacional.",
     tags: ["Automation", "Industry 4.0", "Data Digitization"],
     stack: ["Laravel", "NextJS", "N8N", "WhatsApp API", "Javascript", "CSS"],
-    logo: "/src/assets/logo-fermin.png", // Fallback
-    logos: ["/src/assets/logo-fermin.png", "/src/assets/logo-oleica3.png"],
-    image: "/src/assets/fermin-proyecto.png", // Fallback
+    logo: logoFermin, // Fallback
+    logos: [logoFermin, logoOleica],
+    image: imgFermin, // Fallback
     shineColor: ["#f59e0b", "#d97706"], // Amber
     icon: <Plus className="w-5 h-5 text-amber-400" />,
     subProjects: [
       {
         title: "U.E.C. Fermín Toro",
         details: "Digitalización total de procesos de inscripción y comunicación administrativa mediante WhatsApp API y flujos automatizados con N8N, eliminando procesos manuales y optimizando la atención al representante.",
-        image: "/src/assets/fermin-proyecto.png",
-        logo: "/src/assets/logo-fermin.png",
+        image: imgFermin,
+        logo: logoFermin,
         stack: ["N8N", "WhatsApp API", "Javascript"],
         url: "https://sistema.uefermintoroaraure.com"
       },
       {
         title: "OLEICA C.A.",
         details: "Transformación digital del departamento de Salud Ocupacional. Diseñé e implementé un sistema para la digitalización masiva de expedientes médicos y la generación automatizada de reportes de morbilidad, permitiendo análisis estadísticos en tiempo real.",
-        image: "/src/assets/oleica-proyecto.jpg",
-        logo: "/src/assets/logo-oleica3.png",
+        image: imgOleica,
+        logo: logoOleica,
         stack: ["Laravel", "HTML", "CSS", "Javascript"]
       }
     ]
