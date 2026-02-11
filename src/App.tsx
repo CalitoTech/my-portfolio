@@ -2,7 +2,7 @@ import './App.css'
 import ParticlesBackground from './components/backgrounds/ParticlesBackground'
 import Hero from './components/sections/Hero'
 import Experience from './components/sections/Experience'
-import ContactDock from './components/contactDock'
+import ContactDock from './components/ContactDock'
 
 function App() {
   return (
