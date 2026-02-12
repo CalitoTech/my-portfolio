@@ -24,7 +24,7 @@ import pythonLogo from "../../assets/stack/python-logo.svg";
 import typescriptLogo from "../../assets/stack/typescript-logo.svg";
 import javascriptLogo from "../../assets/stack/javascript-logo.svg";
 import htmlLogo from "../../assets/stack/html-logo.svg";
-import cssLogo from "../../assets/stack/css-logo.svg";
+// import cssLogo from "../../assets/stack/css-logo.svg";
 import postgresLogo from "../../assets/stack/postgres-logo.png";
 import mysqlLogo from "../../assets/stack/mysql-logo.svg";
 import phpLogo from "../../assets/stack/php-logo.png";
