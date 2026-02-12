@@ -95,7 +95,7 @@ const About = () => {
     ];
 
     return (
-        <div id="about" className="w-full max-w-6xl px-6 flex flex-col items-center">
+        <div className="w-full max-w-6xl px-6 flex flex-col items-center">
             {/* 1. Header (Badge + Title) */}
             <BlurFade delay={0.2} inView>
                 <div className="mb-6 flex flex-col items-center text-center">
