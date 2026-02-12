@@ -27,10 +27,10 @@ const ContactDock = () => {
   ];
 
   const socialLinks = [
-    { title: "LinkedIn", icon: <Linkedin className="w-5 h-5" />, href: "https://linkedin.com/in/tu-usuario", color: "hover:text-blue-500" },
-    { title: "GitHub", icon: <Github className="w-5 h-5" />, href: "https://github.com/tu-usuario", color: "hover:text-slate-200" },
-    { title: "WhatsApp", icon: <MessageCircle className="w-5 h-5" />, href: "https://wa.me/tu-numero", color: "hover:text-green-500" },
-    { title: "Email", icon: <Mail className="w-5 h-5" />, href: "mailto:tu@correo.com", color: "hover:text-red-400" }
+    { title: "LinkedIn", icon: <Linkedin className="w-5 h-5" />, href: "https://www.linkedin.com/in/carlos-navas04/", color: "hover:text-blue-500" },
+    { title: "GitHub", icon: <Github className="w-5 h-5" />, href: "https://github.com/CalitoTech", color: "hover:text-slate-200" },
+    { title: "WhatsApp", icon: <MessageCircle className="w-5 h-5" />, href: "https://wa.me/+584263519830", color: "hover:text-green-500" },
+    { title: "Email", icon: <Mail className="w-5 h-5" />, href: "mailto:carlosdanielnavas26@gmail.com", color: "hover:text-red-400" }
   ];
 
   return (
