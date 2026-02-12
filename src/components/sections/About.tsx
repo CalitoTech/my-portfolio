@@ -49,7 +49,7 @@ const About = () => {
                 { name: "OWL", img: owlLogo },
                 { name: "JavaScript", img: javascriptLogo },
                 { name: "HTML5", img: htmlLogo },
-                { name: "CSS3", img: cssLogo },
+                // { name: "CSS3", img: cssLogo },
             ]
         },
         {
