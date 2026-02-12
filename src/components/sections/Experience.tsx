@@ -14,16 +14,16 @@ import {
 } from "lucide-react";
 
 // Import images and logos
-import logoCrediagro from "../../assets/logo-crediagro.png";
-import imgCrediagro from "../../assets/crediagro-proyecto.png";
-import logoAgroo from "../../assets/logo-agroo.png";
-import imgAgroo from "../../assets/agroo-proyecto.png";
-import logoCorpoeureka from "../../assets/logo-corpoeureka.png";
-import imgCorpoeureka from "../../assets/corpoeureka-proyecto.png";
-import logoFermin from "../../assets/logo-fermin.png";
-import imgFermin from "../../assets/fermin-proyecto.png";
-import logoOleica from "../../assets/logo-oleica3.png";
-import imgOleica from "../../assets/oleica-proyecto.jpg";
+import logoCrediagro from "../../assets/logos/logo-crediagro.png";
+import imgCrediagro from "../../assets/projects/crediagro-proyecto.png";
+import logoAgroo from "../../assets/logos/logo-agroo.png";
+import imgAgroo from "../../assets/projects/agroo-proyecto.png";
+import logoCorpoeureka from "../../assets/logos/logo-corpoeureka.png";
+import imgCorpoeureka from "../../assets/projects/corpoeureka-proyecto.png";
+import logoFermin from "../../assets/logos/logo-fermin.png";
+import imgFermin from "../../assets/projects/fermin-proyecto.png";
+import logoOleica from "../../assets/logos/logo-oleica3.png";
+import imgOleica from "../../assets/projects/oleica-proyecto.jpg";
 
 // Define the type for better DX
 interface SubProject {
@@ -145,7 +145,7 @@ const Experience = () => {
   };
 
   return (
-    <div className="w-full max-w-6xl px-6 flex flex-col items-center mt-4">
+    <div className="w-full max-w-6xl px-6 flex flex-col items-center">
       <BlurFade delay={0.2} inView>
         <div className="mb-8 flex flex-col items-center text-center">
           <Badge variant="outline" className="mb-4 border-white/10 bg-white/5 text-slate-400 uppercase tracking-[0.3em] font-bold px-4 py-1">
