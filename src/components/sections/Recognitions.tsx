@@ -107,7 +107,7 @@ const hackathons: HackathonItem[] = [
         description: "Primer Hackathon de Vibe Coding en Venezuela. Seleccionados para el TOP 10 entre 1,500+ aspirantes en una competencia con $50,000 en premios. Un hito de networking con jurados de Ribbit Capital, Cashea, Yummy, Slash, Lovable, Startup Venezuela Summit.",
         badgeValue: "Hito Nacional",
         badgeColor: "bg-blue-500/20 text-blue-500 border-blue-500/30",
-        stats: "TOP 10 / Selección 1:15",
+        stats: "TOP 10",
         icon: <Zap className="w-5 h-5 text-blue-500" />,
         fileUrl: pdfAlegrIA,
         isFeatured: true,
