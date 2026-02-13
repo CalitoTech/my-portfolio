@@ -21,14 +21,14 @@ const Services = () => {
             cta: "Explorar solución",
             background: (
                 <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 via-transparent to-transparent opacity-70 transition-all duration-500 group-hover:scale-110" />
-                    <svg className="absolute right-0 top-0 h-full w-full opacity-15 transition-transform duration-1000 group-hover:scale-150 rotate-12" viewBox="0 0 100 100" fill="none">
-                        <path d="M10 10 L90 10 L90 90 L10 90 Z" stroke="currentColor" strokeWidth="1" className="text-blue-500" />
-                        <circle cx="10" cy="10" r="3" fill="currentColor" className="text-blue-400" />
-                        <circle cx="90" cy="10" r="3" fill="currentColor" className="text-blue-400" />
-                        <circle cx="90" cy="90" r="3" fill="currentColor" className="text-blue-400" />
-                        <circle cx="10" cy="90" r="3" fill="currentColor" className="text-blue-400" />
-                        <path d="M10 10 L90 90 M90 10 L10 90" stroke="currentColor" strokeWidth="0.5" className="text-blue-500/50" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-transparent to-transparent opacity-100 transition-all duration-500 group-hover:scale-110" />
+                    <svg className="absolute right-0 top-0 h-full w-full opacity-25 transition-transform duration-1000 group-hover:scale-150 rotate-12" viewBox="0 0 100 100" fill="none">
+                        <path d="M10 10 L90 10 L90 90 L10 90 Z" strokeWidth="1" className="stroke-blue-500/50" />
+                        <circle cx="10" cy="10" r="3" className="fill-blue-400" />
+                        <circle cx="90" cy="10" r="3" className="fill-blue-400" />
+                        <circle cx="90" cy="90" r="3" className="fill-blue-400" />
+                        <circle cx="10" cy="90" r="3" className="fill-blue-400" />
+                        <path d="M10 10 L90 90 M90 10 L10 90" strokeWidth="0.5" className="stroke-blue-500/30" />
                     </svg>
                 </div>
             ),
@@ -42,11 +42,11 @@ const Services = () => {
             cta: "Ver mobile",
             background: (
                 <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/20 to-transparent opacity-70" />
-                    <div className="absolute -right-4 -top-4 h-40 w-40 rounded-full bg-cyan-500/10 blur-3xl transition-all duration-700 group-hover:bg-cyan-500/30" />
-                    <svg className="absolute bottom-2 left-2 w-full opacity-20" viewBox="0 0 100 40">
-                        <rect x="35" y="0" width="30" height="60" rx="4" stroke="currentColor" strokeWidth="1" className="text-cyan-400" fill="none" />
-                        <circle cx="50" cy="10" r="1.5" fill="currentColor" className="text-cyan-400" />
+                    <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/30 to-transparent opacity-80" />
+                    <div className="absolute -right-4 -top-4 h-40 w-40 rounded-full bg-cyan-500/20 blur-3xl transition-all duration-700 group-hover:bg-cyan-500/40" />
+                    <svg className="absolute bottom-2 left-2 w-full opacity-30" viewBox="0 0 100 40">
+                        <rect x="35" y="0" width="30" height="60" rx="4" strokeWidth="1" className="stroke-cyan-400" fill="none" />
+                        <circle cx="50" cy="10" r="1.5" className="fill-cyan-400" />
                     </svg>
                 </div>
             ),
@@ -60,14 +60,14 @@ const Services = () => {
             cta: "Optimizar",
             background: (
                 <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(245,158,11,0.2),transparent)] transition-opacity duration-500" />
-                    <div className="absolute inset-0 opacity-10"
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(245,158,11,0.3),transparent)] transition-opacity duration-500" />
+                    <div className="absolute inset-0 opacity-15"
                         style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, #f59e0b 2px, transparent 0)', backgroundSize: '24px 24px' }}
                     />
                     <motion.div
-                        animate={{ opacity: [0.2, 0.5, 0.2] }}
+                        animate={{ opacity: [0.3, 0.6, 0.3] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className="absolute top-0 right-0 h-40 w-1.5 bg-gradient-to-b from-amber-500/40 to-transparent"
+                        className="absolute top-0 right-0 h-40 w-1.5 bg-gradient-to-b from-amber-500/50 to-transparent"
                     />
                 </div>
             ),
@@ -81,15 +81,15 @@ const Services = () => {
             cta: "Integrar IA",
             background: (
                 <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-bl from-emerald-500/10 via-transparent to-transparent" />
-                    <svg className="absolute inset-0 h-full w-full opacity-25" viewBox="0 0 100 100">
+                    <div className="absolute inset-0 bg-gradient-to-bl from-emerald-500/20 via-transparent to-transparent" />
+                    <svg className="absolute inset-0 h-full w-full opacity-30" viewBox="0 0 100 100">
                         <defs>
                             <pattern id="grid-ai" width="10" height="10" patternUnits="userSpaceOnUse">
-                                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" strokeWidth="0.4" className="text-emerald-500" />
+                                <path d="M 10 0 L 0 0 0 10" fill="none" strokeWidth="0.4" className="stroke-emerald-500/40" />
                             </pattern>
                         </defs>
                         <rect width="100" height="100" fill="url(#grid-ai)" />
-                        <circle cx="50" cy="50" r="25" stroke="currentColor" strokeWidth="0.3" fill="none" className="text-emerald-400 animate-pulse" />
+                        <circle cx="50" cy="50" r="25" strokeWidth="0.3" fill="none" className="stroke-emerald-400 animate-pulse" />
                     </svg>
                 </div>
             ),
@@ -103,10 +103,10 @@ const Services = () => {
             cta: "Saber más",
             background: (
                 <div className="absolute inset-0 overflow-hidden">
-                    <div className="absolute -bottom-10 -right-10 h-64 w-64 rounded-full bg-purple-600/10 blur-3xl opacity-80" />
-                    <svg className="absolute inset-0 h-full w-full opacity-15" viewBox="0 0 100 100">
-                        <path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="currentColor" strokeWidth="1" fill="none" className="text-purple-400" />
-                        <path d="M0 40 Q 25 15, 50 40 T 100 40" stroke="currentColor" strokeWidth="0.8" fill="none" className="text-purple-500" />
+                    <div className="absolute -bottom-10 -right-10 h-64 w-64 rounded-full bg-purple-600/20 blur-3xl opacity-80" />
+                    <svg className="absolute inset-0 h-full w-full opacity-25" viewBox="0 0 100 100">
+                        <path d="M0 50 Q 25 25, 50 50 T 100 50" strokeWidth="1" fill="none" className="stroke-purple-400" />
+                        <path d="M0 40 Q 25 15, 50 40 T 100 40" strokeWidth="0.8" fill="none" className="stroke-purple-500" />
                     </svg>
                 </div>
             ),
