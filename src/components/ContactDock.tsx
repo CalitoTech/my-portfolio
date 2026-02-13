@@ -8,6 +8,8 @@ import {
   Home,
   Briefcase,
   User,
+  Zap,
+  Layers,
   ArrowRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,7 +25,9 @@ const ContactDock = () => {
   const navItems = [
     { id: "home", title: "Inicio", icon: <Home className="w-5 h-5" />, href: "#home", color: "text-blue-400", bgColor: "group-hover:bg-blue-500/10" },
     { id: "experience", title: "Experiencia", icon: <Briefcase className="w-5 h-5" />, href: "#experience", color: "text-purple-400", bgColor: "group-hover:bg-purple-500/10" },
-    { id: "about", title: "Sobre Mí", icon: <User className="w-5 h-5" />, href: "#about", color: "text-emerald-400", bgColor: "group-hover:bg-emerald-500/10" }
+    { id: "about", title: "Sobre Mí", icon: <User className="w-5 h-5" />, href: "#about", color: "text-emerald-400", bgColor: "group-hover:bg-emerald-500/10" },
+    { id: "services", title: "Servicios", icon: <Layers className="w-5 h-5" />, href: "#services", color: "text-blue-500", bgColor: "group-hover:bg-blue-500/10" },
+    { id: "contact", title: "Contacto", icon: <Zap className="w-5 h-5" />, href: "#contact", color: "text-amber-400", bgColor: "group-hover:bg-amber-500/10" }
   ];
 
   const socialLinks = [
