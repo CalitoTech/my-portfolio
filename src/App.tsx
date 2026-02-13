@@ -2,6 +2,7 @@ import './App.css'
 import Hero from "./components/sections/Hero";
 import Experience from "./components/sections/Experience";
 import About from "./components/sections/About";
+import Recognitions from "./components/sections/Recognitions";
 import Services from "./components/sections/Services";
 import Contact from "./components/sections/Contact";
 import ContactDock from "./components/ContactDock";
@@ -20,11 +21,15 @@ function App() {
         <Experience />
       </section>
 
-      <section id="about" className="relative h-screen w-full flex items-start justify-center snap-start z-10 bg-[#00030a] pt-16 pb-8">
+      <section id="about" className="relative h-screen w-full flex items-start justify-center snap-start z-10 pt-20 pb-8">
         <About />
       </section>
 
-      <section id="services" className="relative h-screen w-full flex items-center justify-center snap-start z-10 bg-[#00030a] py-20 px-6">
+      <section id="recognitions" className="relative h-screen w-full flex items-start justify-center snap-start z-10 pt-2 pb-4 px-6">
+        <Recognitions />
+      </section>
+
+      <section id="services" className="relative h-screen w-full flex items-start justify-center snap-start z-10 py-4 px-6">
         <Services />
       </section>
 
