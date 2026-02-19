@@ -10,30 +10,30 @@ import ParticlesBackground from "./components/backgrounds/ParticlesBackground";
 
 function App() {
   return (
-    <main className="relative h-screen w-full bg-[#00030a] overflow-x-hidden overflow-y-auto snap-y snap-mandatory scroll-smooth">
+    <main className="relative w-full bg-[#00030a] overflow-x-hidden md:h-screen md:overflow-y-auto md:snap-y md:snap-mandatory md:scroll-smooth">
       <ParticlesBackground />
 
-      <section id="home" className="relative h-screen w-full flex items-center justify-center snap-start z-10 py-16">
+      <section id="home" className="relative min-h-screen md:h-screen w-full flex items-center justify-center md:snap-start z-10 py-16">
         <Hero />
       </section>
 
-      <section id="experience" className="relative h-screen w-full flex items-start justify-center snap-start z-10 pt-4 pb-12">
+      <section id="experience" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-4 pb-12">
         <Experience />
       </section>
 
-      <section id="about" className="relative h-screen w-full flex items-start justify-center snap-start z-10 pt-20 pb-8">
+      <section id="about" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-20 pb-8">
         <About />
       </section>
 
-      <section id="recognitions" className="relative h-screen w-full flex items-start justify-center snap-start z-10 pt-2 pb-4 px-6">
+      <section id="recognitions" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-2 pb-4 px-6">
         <Recognitions />
       </section>
 
-      <section id="services" className="relative h-screen w-full flex items-start justify-center snap-start z-10 py-4 px-6">
+      <section id="services" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 py-4 px-6">
         <Services />
       </section>
 
-      <section id="contact" className="relative h-screen w-full flex items-center justify-center snap-start z-10">
+      <section id="contact" className="relative min-h-screen md:h-screen w-full flex items-center justify-center md:snap-start z-10">
         <Contact />
       </section>
 

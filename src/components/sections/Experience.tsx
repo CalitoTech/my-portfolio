@@ -177,7 +177,7 @@ const Experience = () => {
                   className="opacity-40 group-hover:opacity-100 transition-opacity duration-500"
                 />
 
-                <div className="p-8 h-full flex flex-col relative z-20 antialiased">
+                <div className="p-6 md:p-8 h-full flex flex-col relative z-20 antialiased">
                   <div className="flex justify-between items-start mb-8">
                     <div className="flex -space-x-3 transition-transform group-hover:scale-110 duration-500">
                       {exp.logos ? (
@@ -196,7 +196,7 @@ const Experience = () => {
                   </div>
 
                   <div className="flex-1 space-y-3">
-                    <h3 className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">
+                    <h3 className="text-xl md:text-2xl font-black text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">
                       {exp.company}
                     </h3>
                     <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 leading-none">

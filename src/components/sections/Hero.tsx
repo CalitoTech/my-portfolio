@@ -21,7 +21,7 @@ const Hero = () => {
 
       {/* 2. Nombre */}
       <BlurFade delay={0.4} inView>
-        <SparklesText className="text-7xl md:text-9xl font-black tracking-tighter text-white">
+        <SparklesText className="text-5xl md:text-9xl font-black tracking-tighter text-white">
           Carlos Navas
         </SparklesText>
       </BlurFade>

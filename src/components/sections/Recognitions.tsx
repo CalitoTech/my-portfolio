@@ -222,7 +222,7 @@ const Recognitions = () => {
     const featuredHackathon = hackathons.find(h => h.isFeatured);
 
     return (
-        <div className="w-full py-2 lg:py-6 lg:pl-48 relative overflow-hidden">
+        <div className="w-full py-8 lg:py-6 lg:pl-48 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20">
                     {/* Certifications (Left) */}
