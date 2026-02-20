@@ -248,36 +248,43 @@ const Experience = () => {
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               className="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-white/10 rounded-[2.5rem] shadow-2xl p-6 md:p-12 scrollbar-thin"
             >
-              <button
-                onClick={() => setSelectedProject(null)}
-                className="absolute top-6 right-6 p-3 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 text-white transition-all z-50 cursor-pointer"
-              >
-                <X className="w-6 h-6" />
-              </button>
+              {/* Close Button - Sticky & Safe */}
+              <div className="sticky top-0 z-50 flex justify-end pb-4 pointer-events-none">
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="p-2 rounded-full bg-black/50 border border-white/10 text-white backdrop-blur-md hover:bg-white/20 transition-all cursor-pointer pointer-events-auto shadow-2xl"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-                <div className="lg:col-span-3 space-y-10">
-                  <div className="flex items-center gap-6">
-                    <div className="p-4 rounded-3xl bg-white/5 border border-white/10">
-                      <img src={selectedProject.logo} alt={selectedProject.company} className="w-16 h-16 object-contain" />
-                    </div>
-                    <div>
-                      <h3 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tighter">
-                        {selectedProject.company}
-                      </h3>
-                      <div className="flex flex-wrap items-center gap-2 mt-3">
-                        {selectedProject.roles.map(role => (
-                          <Badge key={role} className="bg-blue-600/20 text-blue-400 border border-blue-500/30 px-3 py-1 font-bold text-[10px] uppercase tracking-wider">
-                            {role}
-                          </Badge>
-                        ))}
-                        <Badge variant="outline" className="border-white/10 bg-white/5 text-slate-500 px-3 py-1 font-bold text-[10px] uppercase tracking-wider">
-                          {selectedProject.period}
+              {/* Header Section - Always visible at top */}
+              <div className="mb-8 space-y-8">
+                <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+                  <div className="p-3 md:p-4 rounded-3xl bg-white/5 border border-white/10 shrink-0">
+                    <img src={selectedProject.logo} alt={selectedProject.company} className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-2">
+                      {selectedProject.company}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-2">
+                      {selectedProject.roles.map(role => (
+                        <Badge key={role} className="bg-blue-600/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 md:px-3 md:py-1 font-bold text-[9px] md:text-[10px] uppercase tracking-wider">
+                          {role}
                         </Badge>
-                      </div>
+                      ))}
+                      <Badge variant="outline" className="border-white/10 bg-white/5 text-slate-500 px-2 py-0.5 md:px-3 md:py-1 font-bold text-[9px] md:text-[10px] uppercase tracking-wider">
+                        {selectedProject.period}
+                      </Badge>
                     </div>
                   </div>
+                </div>
+              </div>
 
+              <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+                {/* Details Column - Order 2 on Mobile */}
+                <div className="lg:col-span-3 space-y-8 order-2 lg:order-1">
                   <div className="space-y-6">
                     <div className="flex items-center gap-3 text-white">
                       <Layers className="w-5 h-5 text-blue-500" />
@@ -346,7 +353,7 @@ const Experience = () => {
                   )}
                 </div>
 
-                <div className="lg:col-span-2">
+                <div className="lg:col-span-2 order-1 lg:order-2">
                   <div className="lg:sticky lg:top-0 space-y-6">
                     {!selectedProject.subProjects ? (
                       <>

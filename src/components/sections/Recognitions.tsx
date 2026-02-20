@@ -177,7 +177,7 @@ const HackathonSummaryCard = ({ item }: { item: HackathonItem }) => {
                     </div>
                     <div>
                         <div className="flex items-center gap-2 mb-1">
-                            <h4 className="text-xl font-black text-white uppercase tracking-tight">{item.name}</h4>
+                            <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight whitespace-normal">{item.name}</h4>
                             <Badge variant="outline" className={cn("text-[9px] uppercase font-black px-2", item.badgeColor)}>
                                 {item.badgeValue}
                             </Badge>
@@ -282,7 +282,7 @@ const Recognitions = () => {
                                         <div className="flex items-start justify-between mb-4">
                                             <div className="space-y-1">
                                                 <div className="flex items-center gap-3">
-                                                    <h4 className="text-2xl font-black text-white uppercase tracking-tight whitespace-nowrap">{featuredHackathon.name}</h4>
+                                                    <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight whitespace-normal md:whitespace-nowrap">{featuredHackathon.name}</h4>
                                                     <div className="flex items-center gap-2 shrink-0">
                                                         <Badge className={cn("uppercase tracking-[0.2em] font-black text-[8px]", featuredHackathon.badgeColor)}>
                                                             {featuredHackathon.badgeValue}
@@ -438,7 +438,7 @@ const Recognitions = () => {
                                             <Trophy className="w-6 h-6 text-amber-500" />
                                         </div>
                                         <div>
-                                            <h4 className="text-2xl font-black text-white uppercase tracking-tighter">Crónicas de Hackathons</h4>
+                                            <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter">Crónicas de Hackathons</h4>
                                             <p className="text-[9px] text-slate-500 font-black uppercase tracking-[0.3em] mt-1">Hitos de Innovación & Ingeniería</p>
                                         </div>
                                     </div>
