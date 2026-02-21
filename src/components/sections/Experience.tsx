@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { ShineBorder } from "@/components/ui/shine-border";
@@ -144,6 +144,29 @@ const Experience = () => {
     setSelectedProject(project);
   };
 
+  // Scroll Lock effect
+  useEffect(() => {
+    const isModalOpen = selectedProject !== null || zoomedImage !== null;
+    const mainElement = document.querySelector('main');
+    const sectionElement = document.getElementById('experience');
+
+    if (isModalOpen) {
+      document.body.classList.add('no-scroll');
+      if (mainElement) mainElement.classList.add('no-scroll');
+      if (sectionElement) sectionElement.style.zIndex = '100';
+    } else {
+      document.body.classList.remove('no-scroll');
+      if (mainElement) mainElement.classList.remove('no-scroll');
+      if (sectionElement) sectionElement.style.zIndex = '10';
+    }
+
+    return () => {
+      document.body.classList.remove('no-scroll');
+      if (mainElement) mainElement.classList.remove('no-scroll');
+      if (sectionElement) sectionElement.style.zIndex = '10';
+    };
+  }, [selectedProject, zoomedImage]);
+
   return (
     <div className="w-full max-w-6xl px-6 flex flex-col items-center">
       <BlurFade delay={0.2} inView>
@@ -231,7 +254,7 @@ const Experience = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 overflow-hidden"
           >
             <motion.div
               initial={{ opacity: 0 }}
@@ -246,184 +269,184 @@ const Experience = () => {
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
-              className="relative w-full max-w-6xl max-h-[90vh] overflow-y-auto bg-zinc-950 border border-white/10 rounded-[2.5rem] shadow-2xl p-6 md:p-12 scrollbar-thin"
+              className="relative w-full max-w-6xl h-[90vh] md:h-auto md:max-h-[85vh] bg-zinc-950 border border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden z-[110]"
             >
-              {/* Close Button - Sticky & Safe */}
-              <div className="sticky top-0 z-50 flex justify-end pb-4 pointer-events-none">
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="p-2 rounded-full bg-black/50 border border-white/10 text-white backdrop-blur-md hover:bg-white/20 transition-all cursor-pointer pointer-events-auto shadow-2xl"
-                >
-                  <X className="w-6 h-6" />
-                </button>
-              </div>
+              {/* Close Button - Fixed in corner */}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-4 right-4 md:top-6 md:right-6 p-2 md:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-xl border border-white/10 transition-all z-[110] cursor-pointer shadow-xl"
+              >
+                <X className="w-5 h-5 md:w-6 md:h-6" />
+              </button>
 
-              {/* Header Section - Always visible at top */}
-              <div className="mb-8 space-y-8">
-                <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
-                  <div className="p-3 md:p-4 rounded-3xl bg-white/5 border border-white/10 shrink-0">
-                    <img src={selectedProject.logo} alt={selectedProject.company} className="w-12 h-12 md:w-16 md:h-16 object-contain" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-none mb-2">
-                      {selectedProject.company}
-                    </h3>
-                    <div className="flex flex-wrap items-center gap-2">
-                      {selectedProject.roles.map(role => (
-                        <Badge key={role} className="bg-blue-600/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 md:px-3 md:py-1 font-bold text-[9px] md:text-[10px] uppercase tracking-wider">
-                          {role}
+              <div className="flex-1 overflow-y-auto p-6 md:p-12 scrollbar-thin">
+                {/* Header Section */}
+                <div className="mb-8 pr-12">
+                  <div className="flex flex-col md:flex-row items-start md:items-center gap-4 md:gap-6">
+                    <div className="p-3 md:p-4 rounded-3xl bg-white/5 border border-white/10 shrink-0">
+                      <img src={selectedProject.logo} alt={selectedProject.company} className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+                    </div>
+                    <div>
+                      <h3 className="text-2xl md:text-5xl font-black text-white uppercase tracking-tighter leading-tight mb-2 break-words">
+                        {selectedProject.company}
+                      </h3>
+                      <div className="flex flex-wrap items-center gap-2">
+                        {selectedProject.roles.map(role => (
+                          <Badge key={role} className="bg-blue-600/20 text-blue-400 border border-blue-500/30 px-2 py-0.5 md:px-3 md:py-1 font-bold text-[8px] md:text-[10px] uppercase tracking-wider shrink-0">
+                            {role}
+                          </Badge>
+                        ))}
+                        <Badge variant="outline" className="border-white/10 bg-white/5 text-slate-500 px-2 py-0.5 md:px-3 md:py-1 font-bold text-[8px] md:text-[10px] uppercase tracking-wider shrink-0">
+                          {selectedProject.period}
                         </Badge>
-                      ))}
-                      <Badge variant="outline" className="border-white/10 bg-white/5 text-slate-500 px-2 py-0.5 md:px-3 md:py-1 font-bold text-[9px] md:text-[10px] uppercase tracking-wider">
-                        {selectedProject.period}
-                      </Badge>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
-                {/* Details Column - Order 2 on Mobile */}
-                <div className="lg:col-span-3 space-y-8 order-2 lg:order-1">
-                  <div className="space-y-6">
-                    <div className="flex items-center gap-3 text-white">
-                      <Layers className="w-5 h-5 text-blue-500" />
-                      <h4 className="text-xl font-bold uppercase tracking-tight">Anatomía del Proyecto</h4>
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+                  {/* Details Column - Order 2 on Mobile */}
+                  <div className="lg:col-span-3 space-y-8 order-2 lg:order-1">
+                    <div className="space-y-6">
+                      <div className="flex items-center gap-3 text-white">
+                        <Layers className="w-5 h-5 text-blue-500" />
+                        <h4 className="text-xl font-bold uppercase tracking-tight">Anatomía del Proyecto</h4>
+                      </div>
+                      <p className="text-lg text-slate-300 leading-relaxed font-light">
+                        {selectedProject.details}
+                      </p>
                     </div>
-                    <p className="text-lg text-slate-300 leading-relaxed font-light">
-                      {selectedProject.details}
-                    </p>
-                  </div>
 
-                  {/* Render sub-projects if they exist */}
-                  {selectedProject.subProjects && (
-                    <div className="space-y-12">
-                      {selectedProject.subProjects.map((sub, sIdx) => (
-                        <div key={sIdx} className="space-y-6 border-t border-white/5 pt-10">
-                          <div className="flex items-center gap-4">
-                            <div className="p-2 rounded-xl bg-white border border-white/10 shadow-lg">
-                              <img src={sub.logo} alt={sub.title} className="w-6 h-6 object-contain" />
+                    {/* Render sub-projects if they exist */}
+                    {selectedProject.subProjects && (
+                      <div className="space-y-12">
+                        {selectedProject.subProjects.map((sub, sIdx) => (
+                          <div key={sIdx} className="space-y-6 border-t border-white/5 pt-10">
+                            <div className="flex items-center gap-4">
+                              <div className="p-2 rounded-xl bg-white border border-white/10 shadow-lg">
+                                <img src={sub.logo} alt={sub.title} className="w-6 h-6 object-contain" />
+                              </div>
+                              <h5 className="text-2xl font-black text-white uppercase tracking-tight">{sub.title}</h5>
                             </div>
-                            <h5 className="text-2xl font-black text-white uppercase tracking-tight">{sub.title}</h5>
-                          </div>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="space-y-4">
-                              <p className="text-slate-400 font-light leading-relaxed">{sub.details}</p>
-                              <div className="flex flex-wrap items-center gap-4 pt-2">
-                                <div className="flex flex-wrap gap-2">
-                                  {sub.stack.map(tech => (
-                                    <span key={tech} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400">
-                                      {tech}
-                                    </span>
-                                  ))}
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                              <div className="space-y-4">
+                                <p className="text-slate-400 font-light leading-relaxed">{sub.details}</p>
+                                <div className="flex flex-wrap items-center gap-4 pt-2">
+                                  <div className="flex flex-wrap gap-2">
+                                    {sub.stack.map(tech => (
+                                      <span key={tech} className="text-[10px] font-bold uppercase tracking-wider px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-blue-400">
+                                        {tech}
+                                      </span>
+                                    ))}
+                                  </div>
+                                  {sub.url && (
+                                    <a
+                                      href={sub.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white hover:text-blue-400 transition-colors group/link"
+                                    >
+                                      Ver Sistema <ExternalLink className="w-3 h-3 transition-transform group-hover/link:translate-x-1" />
+                                    </a>
+                                  )}
                                 </div>
-                                {sub.url && (
-                                  <a
-                                    href={sub.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white hover:text-blue-400 transition-colors group/link"
-                                  >
-                                    Ver Sistema <ExternalLink className="w-3 h-3 transition-transform group-hover/link:translate-x-1" />
-                                  </a>
-                                )}
+                              </div>
+                              <div
+                                className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video bg-zinc-900 shadow-2xl rotate-1 cursor-zoom-in"
+                                onClick={() => setZoomedImage(sub.image)}
+                              >
+                                <img src={sub.image} alt={sub.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
                               </div>
                             </div>
-                            <div
-                              className="relative rounded-2xl overflow-hidden border border-white/10 aspect-video bg-zinc-900 shadow-2xl rotate-1 cursor-zoom-in"
-                              onClick={() => setZoomedImage(sub.image)}
-                            >
-                              <img src={sub.image} alt={sub.title} className="w-full h-full object-cover transition-transform duration-700 hover:scale-110" />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {!selectedProject.subProjects && (
+                      <div className="flex flex-wrap gap-3">
+                        {selectedProject.tags.map(tag => (
+                          <span key={tag} className="text-xs font-black uppercase tracking-widest px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-400">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="lg:col-span-2 order-1 lg:order-2">
+                    <div className="lg:sticky lg:top-0 space-y-6">
+                      {!selectedProject.subProjects ? (
+                        <>
+                          <div
+                            className="relative group overflow-hidden rounded-[2.5rem] border border-white/10 aspect-video bg-zinc-900 flex items-center justify-center shadow-2xl cursor-zoom-in"
+                            onClick={() => setZoomedImage(selectedProject.image)}
+                          >
+                            {!imageLoaded && (
+                              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"
+                                style={{ backgroundSize: '200% 100%' }} />
+                            )}
+                            <img
+                              src={selectedProject.image}
+                              alt=""
+                              loading="lazy"
+                              onLoad={() => setImageLoaded(true)}
+                              className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 pointer-events-none" />
+                          </div>
+
+                          <div className="flex flex-col gap-3">
+                            {selectedProject.url && (
+                              <a
+                                href={selectedProject.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-white text-black font-black uppercase text-xs hover:bg-blue-500 hover:text-white transition-all shadow-xl shadow-white/5 active:scale-95"
+                              >
+                                <ExternalLink className="w-4 h-4" /> Ver Caso de Estudio
+                              </a>
+                            )}
+                            <div className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-400 font-black uppercase text-[10px] tracking-widest cursor-default">
+                              <Database className="w-4 h-4" /> Ecosistema Validado
                             </div>
                           </div>
-                        </div>
-                      ))}
-                    </div>
-                  )}
 
-                  {!selectedProject.subProjects && (
-                    <div className="flex flex-wrap gap-3">
-                      {selectedProject.tags.map(tag => (
-                        <span key={tag} className="text-xs font-black uppercase tracking-widest px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-slate-400">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-
-                <div className="lg:col-span-2 order-1 lg:order-2">
-                  <div className="lg:sticky lg:top-0 space-y-6">
-                    {!selectedProject.subProjects ? (
-                      <>
-                        <div
-                          className="relative group overflow-hidden rounded-[2.5rem] border border-white/10 aspect-video bg-zinc-900 flex items-center justify-center shadow-2xl cursor-zoom-in"
-                          onClick={() => setZoomedImage(selectedProject.image)}
-                        >
-                          {!imageLoaded && (
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"
-                              style={{ backgroundSize: '200% 100%' }} />
-                          )}
-                          <img
-                            src={selectedProject.image}
-                            alt=""
-                            loading="lazy"
-                            onLoad={() => setImageLoaded(true)}
-                            className={`w-full h-full object-cover transition-all duration-1000 group-hover:scale-105 ${imageLoaded ? 'opacity-100' : 'opacity-0'}`}
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60 pointer-events-none" />
-                        </div>
-
-                        <div className="flex flex-col gap-3">
-                          {selectedProject.url && (
-                            <a
-                              href={selectedProject.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-white text-black font-black uppercase text-xs hover:bg-blue-500 hover:text-white transition-all shadow-xl shadow-white/5 active:scale-95"
-                            >
-                              <ExternalLink className="w-4 h-4" /> Ver Caso de Estudio
-                            </a>
-                          )}
-                          <div className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-400 font-black uppercase text-[10px] tracking-widest cursor-default">
-                            <Database className="w-4 h-4" /> Ecosistema Validado
+                          <div className="pt-4 space-y-4">
+                            <div className="flex items-center gap-3 text-white border-t border-white/5 pt-4">
+                              <Database className="w-4 h-4 text-blue-500" />
+                              <h4 className="text-xs font-bold uppercase tracking-widest">Stack Tecnológico</h4>
+                            </div>
+                            <div className="flex flex-wrap gap-2">
+                              {selectedProject.stack.map(tech => (
+                                <span key={tech} className="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-400">
+                                  {tech}
+                                </span>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-
-                        <div className="pt-4 space-y-4">
-                          <div className="flex items-center gap-3 text-white border-t border-white/5 pt-4">
-                            <Database className="w-4 h-4 text-blue-500" />
-                            <h4 className="text-xs font-bold uppercase tracking-widest">Stack Tecnológico</h4>
+                        </>
+                      ) : (
+                        <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-white/5 to-transparent border border-white/10 space-y-6 shadow-2xl">
+                          <div className="flex items-center gap-3 text-white">
+                            <Star className="w-5 h-5 text-amber-500" />
+                            <h4 className="text-xl font-black uppercase tracking-tight text-amber-500">Hitos de Carrera</h4>
                           </div>
-                          <div className="flex flex-wrap gap-2">
-                            {selectedProject.stack.map(tech => (
-                              <span key={tech} className="text-[9px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-white/5 border border-white/10 text-slate-400">
-                                {tech}
-                              </span>
+                          <p className="text-sm text-slate-400 leading-relaxed font-light">
+                            Esta sección destaca proyectos que, aunque independientes, forman parte del núcleo de mi formación técnica y capacidad para resolver problemas complejos a medida.
+                          </p>
+                          <div className="grid grid-cols-1 gap-3 pt-4">
+                            {selectedProject.tags.map(tag => (
+                              <div key={tag} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-400 p-3 rounded-xl bg-white/5 border border-white/5">
+                                <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
+                                {tag}
+                              </div>
                             ))}
                           </div>
                         </div>
-                      </>
-                    ) : (
-                      <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-white/5 to-transparent border border-white/10 space-y-6 shadow-2xl">
-                        <div className="flex items-center gap-3 text-white">
-                          <Star className="w-5 h-5 text-amber-500" />
-                          <h4 className="text-xl font-black uppercase tracking-tight text-amber-500">Hitos de Carrera</h4>
-                        </div>
-                        <p className="text-sm text-slate-400 leading-relaxed font-light">
-                          Esta sección destaca proyectos que, aunque independientes, forman parte del núcleo de mi formación técnica y capacidad para resolver problemas complejos a medida.
-                        </p>
-                        <div className="grid grid-cols-1 gap-3 pt-4">
-                          {selectedProject.tags.map(tag => (
-                            <div key={tag} className="flex items-center gap-3 text-[10px] font-black uppercase tracking-widest text-slate-400 p-3 rounded-xl bg-white/5 border border-white/5">
-                              <div className="w-1.5 h-1.5 rounded-full bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.5)]" />
-                              {tag}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -470,7 +493,7 @@ const Experience = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </div >
   );
 };
 

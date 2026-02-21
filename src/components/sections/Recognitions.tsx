@@ -12,7 +12,7 @@ import {
     X
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
 
 /**
@@ -136,21 +136,21 @@ const CertificationCard = ({ item, isCompact = false }: { item: RecognitionItem;
             )}
             onClick={() => item.fileUrl && window.open(item.fileUrl, '_blank')}
         >
-            <div className="flex items-center gap-4 flex-1">
+            <div className="flex items-start gap-4 flex-1 min-w-0">
                 <div className={cn("p-3 rounded-xl bg-gradient-to-br border border-white/10 flex-shrink-0", item.color)}>
                     {item.image ? (
-                        <img src={item.image} alt={item.name} className="w-6 h-6 object-contain" />
+                        <img src={item.image} alt={item.name} className="w-5 h-5 md:w-6 md:h-6 object-contain" />
                     ) : (
-                        <Award className="w-6 h-6 text-white/80" />
+                        <Award className="w-5 h-5 md:w-6 md:h-6 text-white/80" />
                     )}
                 </div>
-                <div className="flex flex-col overflow-hidden">
-                    <div className="flex items-center gap-2">
-                        <span className="text-sm font-black text-white uppercase tracking-tight">{item.name}</span>
+                <div className="flex flex-col gap-1.5 flex-1 min-w-0">
+                    <span className="text-xs md:text-sm font-black text-white uppercase tracking-tight break-words leading-tight">{item.name}</span>
+                    <div className="flex flex-wrap gap-2">
                         {item.icon}
                     </div>
                     {!isCompact && (
-                        <p className="text-xs text-slate-400 mt-1 font-light leading-snug">
+                        <p className="text-[10px] md:text-xs text-slate-400 mt-1 font-light leading-snug">
                             {item.description}
                         </p>
                     )}
@@ -168,19 +168,21 @@ const CertificationCard = ({ item, isCompact = false }: { item: RecognitionItem;
 const HackathonSummaryCard = ({ item }: { item: HackathonItem }) => {
     return (
         <div
-            className="group relative rounded-3xl border border-white/10 bg-[#0a0f18]/80 backdrop-blur-md p-8 flex flex-col gap-6 shadow-xl cursor-default"
+            className="group relative rounded-3xl border border-white/10 bg-[#0a0f18]/80 backdrop-blur-md p-6 md:p-8 flex flex-col gap-6 shadow-xl cursor-default"
         >
             <div className="flex items-start justify-between">
-                <div className="flex gap-4 items-center">
-                    <div className="p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-105 transition-transform">
+                <div className="flex gap-4 items-start">
+                    <div className="p-3 md:p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-105 transition-transform shrink-0">
                         {item.icon}
                     </div>
-                    <div>
-                        <div className="flex items-center gap-2 mb-1">
-                            <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight whitespace-normal">{item.name}</h4>
-                            <Badge variant="outline" className={cn("text-[9px] uppercase font-black px-2", item.badgeColor)}>
-                                {item.badgeValue}
-                            </Badge>
+                    <div className="min-w-0">
+                        <div className="flex flex-col gap-2 mb-1">
+                            <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight whitespace-normal break-words leading-tight">{item.name}</h4>
+                            <div className="flex flex-wrap gap-2">
+                                <Badge variant="outline" className={cn("text-[9px] uppercase font-black px-2 shrink-0 py-0.5", item.badgeColor)}>
+                                    {item.badgeValue}
+                                </Badge>
+                            </div>
                         </div>
                         {item.stats && <p className="text-[10px] text-blue-400 font-bold uppercase tracking-widest">{item.stats}</p>}
                     </div>
@@ -220,6 +222,29 @@ const Recognitions = () => {
     const [isHackModalOpen, setIsHackModalOpen] = useState(false);
     const initialCerts = certifications.slice(0, 4);
     const featuredHackathon = hackathons.find(h => h.isFeatured);
+
+    // Scroll Lock effect
+    useEffect(() => {
+        const isModalOpen = isCertModalOpen || isHackModalOpen;
+        const mainElement = document.querySelector('main');
+        const sectionElement = document.getElementById('recognitions');
+
+        if (isModalOpen) {
+            document.body.classList.add('no-scroll');
+            if (mainElement) mainElement.classList.add('no-scroll');
+            if (sectionElement) sectionElement.style.zIndex = '100';
+        } else {
+            document.body.classList.remove('no-scroll');
+            if (mainElement) mainElement.classList.remove('no-scroll');
+            if (sectionElement) sectionElement.style.zIndex = '10';
+        }
+
+        return () => {
+            document.body.classList.remove('no-scroll');
+            if (mainElement) mainElement.classList.remove('no-scroll');
+            if (sectionElement) sectionElement.style.zIndex = '10';
+        };
+    }, [isCertModalOpen, isHackModalOpen]);
 
     return (
         <div className="w-full py-8 lg:py-6 lg:pl-48 relative overflow-hidden">
@@ -281,13 +306,13 @@ const Recognitions = () => {
                                     >
                                         <div className="flex items-start justify-between mb-4">
                                             <div className="space-y-1">
-                                                <div className="flex items-center gap-3">
-                                                    <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight whitespace-normal md:whitespace-nowrap">{featuredHackathon.name}</h4>
-                                                    <div className="flex items-center gap-2 shrink-0">
-                                                        <Badge className={cn("uppercase tracking-[0.2em] font-black text-[8px]", featuredHackathon.badgeColor)}>
+                                                <div className="flex flex-col gap-3">
+                                                    <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight whitespace-normal break-words">{featuredHackathon.name}</h4>
+                                                    <div className="flex items-center gap-2">
+                                                        <Badge className={cn("uppercase tracking-[0.2em] font-black text-[8px] shrink-0", featuredHackathon.badgeColor)}>
                                                             {featuredHackathon.badgeValue}
                                                         </Badge>
-                                                        <Zap className="w-4 h-4 text-emerald-500 animate-pulse" />
+                                                        <Zap className="w-4 h-4 text-emerald-500 animate-pulse shrink-0" />
                                                     </div>
                                                 </div>
                                                 <p className="text-xs text-blue-400 font-black tracking-widest uppercase">{featuredHackathon.stats}</p>
@@ -380,22 +405,29 @@ const Recognitions = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-xl p-6"
+                            className="fixed inset-0 z-[100] flex items-center justify-center p-6"
                         >
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+                                onClick={() => setIsCertModalOpen(false)}
+                            />
                             <motion.div
                                 initial={{ scale: 0.9, y: 20 }}
                                 animate={{ scale: 1, y: 0 }}
                                 exit={{ scale: 0.9, y: 20 }}
-                                className="bg-[#00030a] border border-white/10 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl"
+                                className="bg-[#00030a] border border-white/10 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl z-[110]"
                             >
                                 <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/5">
-                                    <div className="flex items-center gap-3">
-                                        <Medal className="w-5 h-5 text-blue-500" />
-                                        <h4 className="text-xl font-black text-white uppercase tracking-tight">Todas las Certificaciones</h4>
+                                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                                        <Medal className="w-5 h-5 text-blue-500 shrink-0" />
+                                        <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight break-words">Todas las Certificaciones</h4>
                                     </div>
                                     <button
                                         onClick={() => setIsCertModalOpen(false)}
-                                        className="p-2 rounded-full hover:bg-white/10 text-slate-400 transition-colors"
+                                        className="p-2 rounded-full hover:bg-white/10 text-slate-400 transition-colors shrink-0"
                                     >
                                         <X className="w-5 h-5" />
                                     </button>
@@ -424,29 +456,36 @@ const Recognitions = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-2xl p-6"
+                            className="fixed inset-0 z-[100] flex items-center justify-center p-6"
                         >
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute inset-0 bg-black/90 backdrop-blur-2xl"
+                                onClick={() => setIsHackModalOpen(false)}
+                            />
                             <motion.div
                                 initial={{ scale: 0.9, y: 20 }}
                                 animate={{ scale: 1, y: 0 }}
                                 exit={{ scale: 0.9, y: 20 }}
-                                className="bg-[#00030a] border border-white/10 w-full max-w-4xl rounded-[40px] overflow-hidden shadow-2xl"
+                                className="bg-[#00030a] border border-white/10 w-full max-w-4xl rounded-[40px] overflow-hidden shadow-2xl z-[110]"
                             >
                                 <div className="flex items-center justify-between p-8 border-b border-white/5 bg-white/5">
-                                    <div className="flex items-center gap-4">
-                                        <div className="p-3 rounded-2xl bg-amber-500/20 border border-amber-500/30">
-                                            <Trophy className="w-6 h-6 text-amber-500" />
+                                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                                        <div className="p-2 md:p-3 rounded-2xl bg-amber-500/20 border border-amber-500/30 shrink-0">
+                                            <Trophy className="w-5 h-5 md:w-6 md:h-6 text-amber-500" />
                                         </div>
-                                        <div>
-                                            <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tighter">Crónicas de Hackathons</h4>
-                                            <p className="text-[9px] text-slate-500 font-black uppercase tracking-[0.3em] mt-1">Hitos de Innovación & Ingeniería</p>
+                                        <div className="min-w-0">
+                                            <h4 className="text-lg md:text-2xl font-black text-white uppercase tracking-tighter break-words leading-tight">Crónicas de Hackathons</h4>
+                                            <p className="text-[8px] md:text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mt-1 whitespace-normal">Hitos de Innovación & Ingeniería</p>
                                         </div>
                                     </div>
                                     <button
                                         onClick={() => setIsHackModalOpen(false)}
-                                        className="p-3 rounded-full hover:bg-white/10 text-slate-400 transition-colors cursor-pointer"
+                                        className="p-2 md:p-3 rounded-full hover:bg-white/10 text-slate-400 transition-colors cursor-pointer shrink-0"
                                     >
-                                        <X className="w-6 h-6" />
+                                        <X className="w-5 h-5 md:w-6 md:h-6" />
                                     </button>
                                 </div>
 
