@@ -54,7 +54,7 @@ const Hero = () => {
 
       {/* 5. Descripción */}
       <BlurFade delay={0.8} inView>
-        <p className="mt-7 mb-14 max-w-xl text-lg md:text-xl text-slate-400 font-light leading-relaxed">
+        <p className="mt-6 mb-10 max-w-xl text-lg md:text-xl text-slate-400 font-light leading-relaxed">
           Arquitecto de sistemas escalables y <span className="text-white">líder técnico</span>.
           Transformando el sector agrícola con código de alto rendimiento.
         </p>

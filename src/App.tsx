@@ -17,11 +17,11 @@ function App() {
         <Hero />
       </section>
 
-      <section id="experience" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-4 pb-12">
+      <section id="experience" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-2 pb-12">
         <Experience />
       </section>
 
-      <section id="about" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-20 pb-8">
+      <section id="about" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-10 pb-8">
         <About />
       </section>
 
@@ -29,7 +29,7 @@ function App() {
         <Recognitions />
       </section>
 
-      <section id="services" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 py-4 px-6">
+      <section id="services" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-0 pb-4 px-6">
         <Services />
       </section>
 

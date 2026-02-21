@@ -145,9 +145,11 @@ const CertificationCard = ({ item, isCompact = false }: { item: RecognitionItem;
                     )}
                 </div>
                 <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-                    <span className="text-xs md:text-sm font-black text-white uppercase tracking-tight break-words leading-tight">{item.name}</span>
-                    <div className="flex flex-wrap gap-2">
-                        {item.icon}
+                    <div className="flex flex-col md:flex-row md:items-center gap-1.5 md:gap-3">
+                        <span className="text-xs md:text-sm font-black text-white uppercase tracking-tight break-words leading-tight">{item.name}</span>
+                        <div className="flex flex-wrap gap-2">
+                            {item.icon}
+                        </div>
                     </div>
                     {!isCompact && (
                         <p className="text-[10px] md:text-xs text-slate-400 mt-1 font-light leading-snug">
@@ -176,7 +178,7 @@ const HackathonSummaryCard = ({ item }: { item: HackathonItem }) => {
                         {item.icon}
                     </div>
                     <div className="min-w-0">
-                        <div className="flex flex-col gap-2 mb-1">
+                        <div className="flex flex-col md:flex-row md:items-center gap-2 mb-1">
                             <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight whitespace-normal break-words leading-tight">{item.name}</h4>
                             <div className="flex flex-wrap gap-2">
                                 <Badge variant="outline" className={cn("text-[9px] uppercase font-black px-2 shrink-0 py-0.5", item.badgeColor)}>
@@ -247,7 +249,7 @@ const Recognitions = () => {
     }, [isCertModalOpen, isHackModalOpen]);
 
     return (
-        <div className="w-full py-8 lg:py-6 lg:pl-48 relative overflow-hidden">
+        <div className="w-full pt-0 pb-8 lg:pt-0 lg:pb-6 lg:pl-48 relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20">
                     {/* Certifications (Left) */}
@@ -306,7 +308,7 @@ const Recognitions = () => {
                                     >
                                         <div className="flex items-start justify-between mb-4">
                                             <div className="space-y-1">
-                                                <div className="flex flex-col gap-3">
+                                                <div className="flex flex-col md:flex-row md:items-center gap-3">
                                                     <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight whitespace-normal break-words">{featuredHackathon.name}</h4>
                                                     <div className="flex items-center gap-2">
                                                         <Badge className={cn("uppercase tracking-[0.2em] font-black text-[8px] shrink-0", featuredHackathon.badgeColor)}>

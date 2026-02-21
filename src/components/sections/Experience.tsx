@@ -170,11 +170,11 @@ const Experience = () => {
   return (
     <div className="w-full max-w-6xl px-6 flex flex-col items-center">
       <BlurFade delay={0.2} inView>
-        <div className="mb-8 flex flex-col items-center text-center">
+        <div className="mb-4 flex flex-col items-center text-center">
           <Badge variant="outline" className="mb-4 border-white/10 bg-white/5 text-slate-400 uppercase tracking-[0.3em] font-bold px-4 py-1">
             Trayectoria Profesional
           </Badge>
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-6">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-4">
             Ecosistemas <span className="text-blue-500">&</span> Liderazgo
           </h2>
           <p className="max-w-3xl text-xl text-slate-400 font-light leading-relaxed">

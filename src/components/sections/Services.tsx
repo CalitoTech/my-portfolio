@@ -115,9 +115,9 @@ const Services = () => {
     ];
 
     return (
-        <div className="relative z-20 max-w-6xl w-full flex flex-col items-center pt-4">
+        <div className="relative z-20 max-w-6xl w-full flex flex-col items-center pt-0">
             <BlurFade delay={0.1} inView>
-                <div className="text-center mb-10">
+                <div className="text-center mb-4">
                     <Badge variant="outline" className="mb-4 border-white/10 bg-white/5 text-blue-400 uppercase tracking-[0.4em] font-bold px-4 py-1 text-[10px]">
                         Estrategia & Soluciones
                     </Badge>

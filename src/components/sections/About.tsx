@@ -98,7 +98,7 @@ const About = () => {
         <div className="w-full max-w-6xl px-6 flex flex-col items-center">
             {/* 1. Header (Badge + Title) */}
             <BlurFade delay={0.2} inView>
-                <div className="mb-6 flex flex-col items-center text-center">
+                <div className="mb-4 flex flex-col items-center text-center">
                     <Badge variant="outline" className="mb-3 border-white/10 bg-white/5 text-blue-400 uppercase tracking-[0.3em] font-bold px-4 py-1 text-[10px]">
                         Sobre Mí
                     </Badge>
