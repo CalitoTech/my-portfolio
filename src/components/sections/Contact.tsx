@@ -28,8 +28,15 @@ const Contact = () => {
 
                 <BlurFade delay={0.2} inView>
                     <div className="flex flex-col md:flex-row items-center gap-6">
-                        <a href="https://wa.me/tu-numero" target="_blank" rel="noopener noreferrer">
-                            <InteractiveHoverButton className="px-12 py-8 text-xl font-black uppercase tracking-widest bg-white border-transparent">
+                        <a href="https://wa.me/584263519830" target="_blank" rel="noopener noreferrer" className="group/wa">
+                            <InteractiveHoverButton
+                                className="px-12 py-8 text-xl font-black uppercase tracking-widest bg-white text-black border-black/20"
+                                style={{
+                                    // @ts-ignore
+                                    '--primary': '#000000',
+                                    '--primary-foreground': '#ffffff'
+                                } as React.CSSProperties}
+                            >
                                 WhatsApp
                             </InteractiveHoverButton>
                         </a>
@@ -37,14 +44,14 @@ const Contact = () => {
                         <div className="flex items-center gap-4">
                             <motion.a
                                 whileHover={{ y: -5, scale: 1.1 }}
-                                href="mailto:tu@correo.com"
+                                href="mailto:carlosdanielnavas26@gmail.com"
                                 className="p-5 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
                             >
                                 <Mail className="w-7 h-7" />
                             </motion.a>
                             <motion.a
                                 whileHover={{ y: -5, scale: 1.1 }}
-                                href="https://github.com/tu-usuario"
+                                href="https://github.com/CalitoTech"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="p-5 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
@@ -53,7 +60,7 @@ const Contact = () => {
                             </motion.a>
                             <motion.a
                                 whileHover={{ y: -5, scale: 1.1 }}
-                                href="https://linkedin.com/in/tu-usuario"
+                                href="https://linkedin.com/in/carlos-navas04"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="p-5 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
@@ -70,10 +77,12 @@ const Contact = () => {
                 <p className="text-xs font-bold uppercase tracking-[0.3em] text-center md:text-left">
                     © {new Date().getFullYear()} Carlos Navas · Architect & Founder
                 </p>
-                <div className="flex items-center gap-8 text-xs font-bold uppercase tracking-widest transition-colors duration-300">
+                <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-8 gap-y-4 text-xs font-bold uppercase tracking-widest transition-colors duration-300">
                     <a href="#home" className="hover:text-blue-400 transition-colors">Inicio</a>
                     <a href="#experience" className="hover:text-purple-400 transition-colors">Experiencia</a>
                     <a href="#about" className="hover:text-emerald-400 transition-colors">Sobre Mí</a>
+                    <a href="#recognitions" className="hover:text-amber-400 transition-colors">Reconocimientos</a>
+                    <a href="#services" className="hover:text-cyan-400 transition-colors">Servicios</a>
                 </div>
             </div>
 

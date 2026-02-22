@@ -332,7 +332,6 @@ const Recognitions = () => {
                                                         className="w-full"
                                                         animationStyle="from-center"
                                                         videoSrc={featuredHackathon.video}
-                                                        thumbnailSrc={featuredHackathon.image || ""}
                                                         thumbnailAlt={featuredHackathon.name}
                                                     />
                                                 </div>
