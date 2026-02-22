@@ -22,7 +22,8 @@ const ContactDock = () => {
   const [isHovered, setIsHovered] = useState(false);
 
   const toggleLanguage = () => {
-    const newLang = i18n.language === 'es' ? 'en' : 'es';
+    const currentLang = i18n.resolvedLanguage || i18n.language;
+    const newLang = currentLang?.startsWith('es') ? 'en' : 'es';
     i18n.changeLanguage(newLang);
   };
 
@@ -100,7 +101,7 @@ const ContactDock = () => {
                     exit={{ opacity: 0, x: -10 }}
                     className="text-[10px] font-black uppercase tracking-[0.15em] whitespace-nowrap"
                   >
-                    {i18n.language === 'es' ? 'English' : 'Español'}
+                    {(i18n.resolvedLanguage || i18n.language)?.startsWith('es') ? 'English' : 'Español'}
                   </motion.span>
                 )}
               </AnimatePresence>
