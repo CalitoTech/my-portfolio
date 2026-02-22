@@ -9,6 +9,7 @@ import {
     ShieldCheck,
     Cpu,
 } from "lucide-react";
+import { useTranslation, Trans } from "react-i18next";
 
 // Import your photo
 import myPhoto from "../../assets/my_photo.jpg";
@@ -38,9 +39,11 @@ import viteLogo from "../../assets/stack/vite-logo.png";
 import owlLogo from "../../assets/stack/owl-logo.png";
 
 const About = () => {
+    const { t } = useTranslation();
+
     const stack = [
         {
-            title: "Frontend",
+            title: t("about.stack.frontend"),
             shineColor: ["#3b82f6", "#2563eb"],
             skills: [
                 { name: "React", img: reactLogo },
@@ -53,7 +56,7 @@ const About = () => {
             ]
         },
         {
-            title: "Backend & DB",
+            title: t("about.stack.backend"),
             shineColor: ["#64748b", "#94a3b8"],
             skills: [
                 { name: "Python", img: pythonLogo },
@@ -65,7 +68,7 @@ const About = () => {
             ]
         },
         {
-            title: "Aprendiendo",
+            title: t("about.stack.learning"),
             shineColor: ["#a855f7", "#7c3aed"],
             skills: [
                 { name: "Docker", img: dockerLogo },
@@ -74,7 +77,7 @@ const About = () => {
             ]
         },
         {
-            title: "Herramientas",
+            title: t("about.stack.tools"),
             shineColor: ["#06b6d4", "#22d3ee"],
             skills: [
                 { name: "n8n", img: n8nLogo },
@@ -88,10 +91,10 @@ const About = () => {
     ];
 
     const stats = [
-        { label: "Aumento en Eficiencia", value: "10x", icon: <Zap className="w-5 h-5 text-blue-500" />, color: "text-blue-500" },
-        { label: "Usuarios Activos", value: "+5k", icon: <Database className="w-5 h-5 text-green-500" />, color: "text-green-500" },
-        { label: "Uptime en Sistemas", value: "99.9%", icon: <ShieldCheck className="w-5 h-5 text-purple-500" />, color: "text-purple-500" },
-        { label: "Procesos Digitalizados", value: "100%", icon: <Cpu className="w-5 h-5 text-amber-500" />, color: "text-amber-500" },
+        { label: t("about.stats.efficiency"), value: "10x", icon: <Zap className="w-5 h-5 text-blue-500" />, color: "text-blue-500" },
+        { label: t("about.stats.active_users"), value: "+5k", icon: <Database className="w-5 h-5 text-green-500" />, color: "text-green-500" },
+        { label: t("about.stats.uptime"), value: "99.9%", icon: <ShieldCheck className="w-5 h-5 text-purple-500" />, color: "text-purple-500" },
+        { label: t("about.stats.digitalized"), value: "100%", icon: <Cpu className="w-5 h-5 text-amber-500" />, color: "text-amber-500" },
     ];
 
     return (
@@ -100,10 +103,12 @@ const About = () => {
             <BlurFade delay={0.2} inView>
                 <div className="mb-4 flex flex-col items-center text-center">
                     <Badge variant="outline" className="mb-3 border-white/10 bg-white/5 text-blue-400 uppercase tracking-[0.3em] font-bold px-4 py-1 text-[10px]">
-                        Sobre Mí
+                        {t("about.badge")}
                     </Badge>
                     <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-white mb-2 uppercase">
-                        Automatización <span className="text-blue-500">&</span> Escalabilidad
+                        <Trans i18nKey="about.title">
+                            Automatización <span className="text-blue-500">&</span> Escalabilidad
+                        </Trans>
                     </h2>
                 </div>
             </BlurFade>
@@ -128,9 +133,9 @@ const About = () => {
 
                     <BlurFade delay={0.4} inView>
                         <div className="space-y-3">
-                            <h3 className="text-xl font-bold text-white tracking-tight leading-none text-center lg:text-left">Arquitecto de Soluciones</h3>
+                            <h3 className="text-xl font-bold text-white tracking-tight leading-none text-center lg:text-left">{t("about.role_title")}</h3>
                             <p className="text-slate-400 leading-relaxed font-light text-[11px] md:text-xs">
-                                Mi enfoque es simple: si un proceso puede ser automatizado, debe serlo. Me especializo en transformar operaciones complejas en flujos digitales autónomos y capaces de escalar sin límites.
+                                {t("about.bio")}
                             </p>
                         </div>
                     </BlurFade>

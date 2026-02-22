@@ -2,6 +2,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedList } from "@/components/ui/animated-list";
 import { motion, AnimatePresence } from "motion/react";
+import { useTranslation } from "react-i18next";
 import {
     Trophy,
     Award,
@@ -69,66 +70,6 @@ interface HackathonItem {
     video?: string;
 }
 
-const certifications: RecognitionItem[] = [
-    {
-        name: "TSU en Informática",
-        description: "Graduado en la UPTP 'Juan de Jesus Montilla'. Base sólida en ingeniería de software y sistemas.",
-        image: imgTSU,
-        fileUrl: pdfTSU,
-        icon: <Badge className="bg-red-500/20 text-red-400 border-red-500/30 font-black">UPTP</Badge>,
-        color: "from-red-500/10",
-    },
-    {
-        name: "Claude Code in Action",
-        description: "Certificación avanzada en el uso de Claude Code para ingeniería agéntica y desarrollo acelerado.",
-        image: imgClaude,
-        fileUrl: pdfClaude,
-        icon: <Badge className="bg-white/10 text-white border-white/20">Anthropic</Badge>,
-        color: "from-white/10",
-    },
-    {
-        name: "Hackathon AlegrIA 2025",
-        description: "TOP 10 en la primera competencia de Vibe Coding en Venezuela. Seleccionado entre 1500+ aspirantes.",
-        image: imgAlegrIA,
-        fileUrl: pdfAlegrIA,
-        icon: <Badge className="bg-blue-600/20 text-blue-400 border-blue-600/30">AlegrIA Labs</Badge>,
-        color: "from-blue-600/10",
-    },
-    {
-        name: "Hackathon CorpoEureka",
-        description: "2do Lugar Nacional en la disciplina de Backend. Arquitectura robusta y escalable.",
-        image: imgCorpoEureka,
-        fileUrl: pdfCorpoEureka,
-        icon: <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">CorpoEureka</Badge>,
-        color: "from-purple-500/10",
-    }
-];
-
-const hackathons: HackathonItem[] = [
-    {
-        name: "Hackathon AlegrIA 2025",
-        description: "Primer Hackathon de Vibe Coding en Venezuela. Seleccionados para el TOP 10 entre 1,500+ aspirantes en una competencia con $50,000 en premios. Un hito de networking con jurados de Ribbit Capital, Cashea, Yummy, Slash, Lovable, Startup Venezuela Summit.",
-        badgeValue: "Hito Nacional",
-        badgeColor: "bg-blue-500/20 text-blue-500 border-blue-500/30",
-        stats: "TOP 10",
-        icon: <Zap className="w-5 h-5 text-blue-500" />,
-        fileUrl: pdfAlegrIA,
-        isFeatured: true,
-        video: alegVideo,
-        image: alegImg1,
-        visuals: [alegImg2, alegImg3, alegImg4, alegImg5, alegImg6]
-    },
-    {
-        name: "Hackathon CorpoEureka",
-        description: "Ganador del 2do lugar nacional en la disciplina de Backend dentro de la competencia técnica de CorpoEureka.",
-        badgeValue: "2DO LUGAR BACKEND",
-        badgeColor: "border-purple-500/30 text-purple-400",
-        icon: <Award className="w-8 h-8 text-purple-500" />,
-        fileUrl: pdfCorpoEureka,
-        image: corpoImg1,
-        visuals: [corpoImg2, corpoImg3]
-    }
-];
 
 const CertificationCard = ({ item, isCompact = false }: { item: RecognitionItem; isCompact?: boolean }) => {
     return (
@@ -285,9 +226,72 @@ const HackathonSummaryCard = ({ item, onImageClick }: { item: HackathonItem; onI
 };
 
 const Recognitions = () => {
+    const { t } = useTranslation();
     const [isCertModalOpen, setIsCertModalOpen] = useState(false);
     const [isHackModalOpen, setIsHackModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+    const certifications: RecognitionItem[] = [
+        {
+            name: t("recognitions.certs.items.tsu.name"),
+            description: t("recognitions.certs.items.tsu.description"),
+            image: imgTSU,
+            fileUrl: pdfTSU,
+            icon: <Badge className="bg-red-500/20 text-red-400 border-red-500/30 font-black">{t("recognitions.certs.items.tsu.origin")}</Badge>,
+            color: "from-red-500/10",
+        },
+        {
+            name: t("recognitions.certs.items.claude.name"),
+            description: t("recognitions.certs.items.claude.description"),
+            image: imgClaude,
+            fileUrl: pdfClaude,
+            icon: <Badge className="bg-white/10 text-white border-white/20">{t("recognitions.certs.items.claude.origin")}</Badge>,
+            color: "from-white/10",
+        },
+        {
+            name: t("recognitions.certs.items.alegria.name"),
+            description: t("recognitions.certs.items.alegria.description"),
+            image: imgAlegrIA,
+            fileUrl: pdfAlegrIA,
+            icon: <Badge className="bg-blue-600/20 text-blue-400 border-blue-600/30">{t("recognitions.certs.items.alegria.origin")}</Badge>,
+            color: "from-blue-600/10",
+        },
+        {
+            name: t("recognitions.certs.items.corpoeureka.name"),
+            description: t("recognitions.certs.items.corpoeureka.description"),
+            image: imgCorpoEureka,
+            fileUrl: pdfCorpoEureka,
+            icon: <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">{t("recognitions.certs.items.corpoeureka.origin")}</Badge>,
+            color: "from-purple-500/10",
+        }
+    ];
+
+    const hackathons: HackathonItem[] = [
+        {
+            name: t("recognitions.hackathons.items.alegria.name"),
+            description: t("recognitions.hackathons.items.alegria.description"),
+            badgeValue: t("recognitions.hackathons.items.alegria.badge"),
+            badgeColor: "bg-blue-500/20 text-blue-500 border-blue-500/30",
+            stats: t("recognitions.hackathons.items.alegria.stats"),
+            icon: <Zap className="w-5 h-5 text-blue-500" />,
+            fileUrl: pdfAlegrIA,
+            isFeatured: true,
+            video: alegVideo,
+            image: alegImg1,
+            visuals: [alegImg2, alegImg3, alegImg4, alegImg5, alegImg6]
+        },
+        {
+            name: t("recognitions.hackathons.items.corpoeureka.name"),
+            description: t("recognitions.hackathons.items.corpoeureka.description"),
+            badgeValue: t("recognitions.hackathons.items.corpoeureka.badge"),
+            badgeColor: "border-purple-500/30 text-purple-400",
+            icon: <Award className="w-8 h-8 text-purple-500" />,
+            fileUrl: pdfCorpoEureka,
+            image: corpoImg1,
+            visuals: [corpoImg2, corpoImg3]
+        }
+    ];
+
     const initialCerts = certifications.slice(0, 4);
     const featuredHackathon = hackathons.find(h => h.isFeatured);
 
@@ -323,10 +327,10 @@ const Recognitions = () => {
                         <BlurFade delay={0.1} inView>
                             <div className="flex items-center gap-4 mb-2">
                                 <Medal className="w-6 h-6 text-blue-500" />
-                                <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Certificaciones</h3>
+                                <h3 className="text-3xl font-black text-white uppercase tracking-tighter">{t("recognitions.certs.title")}</h3>
                             </div>
                             <p className="text-slate-400 font-light mb-1 max-w-2xl text-xs md:text-sm">
-                                Validación continua por líderes globales. Solo se muestran los más recientes.
+                                {t("recognitions.certs.description")}
                             </p>
                         </BlurFade>
 
@@ -348,7 +352,7 @@ const Recognitions = () => {
                                     className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition-all font-black uppercase text-[10px] tracking-[0.2em]"
                                 >
                                     <Plus className="w-4 h-4" />
-                                    Ver todas las certificaciones
+                                    {t("recognitions.certs.button_all")}
                                 </motion.button>
                             )}
                         </div>
@@ -359,10 +363,10 @@ const Recognitions = () => {
                         <BlurFade delay={0.2} inView>
                             <div className="flex items-center gap-4 mb-2">
                                 <Trophy className="w-6 h-6 text-amber-500" />
-                                <h3 className="text-3xl font-black text-white uppercase tracking-tighter">Hackathons</h3>
+                                <h3 className="text-3xl font-black text-white uppercase tracking-tighter">{t("recognitions.hackathons.title")}</h3>
                             </div>
                             <p className="text-slate-400 font-light mb-1 max-w-2xl text-xs md:text-sm">
-                                Competencias de alto nivel donde la arquitectura e innovación se ponen a prueba.
+                                {t("recognitions.hackathons.description")}
                             </p>
                         </BlurFade>
 
@@ -392,14 +396,16 @@ const Recognitions = () => {
                                         </p>
 
                                         <HorizontalScroll>
-                                            <div className="w-[85%] md:w-[70%] flex-shrink-0 snap-center">
-                                                <HeroVideoDialog
-                                                    className="w-full"
-                                                    animationStyle="from-center"
-                                                    videoSrc={featuredHackathon.video}
-                                                    thumbnailAlt={featuredHackathon.name}
-                                                />
-                                            </div>
+                                            {featuredHackathon.video && (
+                                                <div className="w-[85%] md:w-[70%] flex-shrink-0 snap-center">
+                                                    <HeroVideoDialog
+                                                        className="w-full"
+                                                        animationStyle="from-center"
+                                                        videoSrc={featuredHackathon.video}
+                                                        thumbnailAlt={featuredHackathon.name}
+                                                    />
+                                                </div>
+                                            )}
                                             {featuredHackathon.visuals && featuredHackathon.visuals.length > 0 && featuredHackathon.visuals.map((v, i) => (
                                                 <div
                                                     key={i}
@@ -431,7 +437,7 @@ const Recognitions = () => {
                                             className="mt-8 flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-amber-500/5 border border-amber-500/10 text-amber-500/60 hover:text-amber-500 hover:bg-amber-500/10 transition-all font-bold uppercase text-[9px] tracking-[0.2em] cursor-pointer"
                                         >
                                             <Trophy className="w-3 h-3" />
-                                            Ver historial de hackathons
+                                            {t("recognitions.hackathons.button_history")}
                                         </motion.button>
                                     </div>
                                 )}
@@ -465,7 +471,7 @@ const Recognitions = () => {
                                 <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/5">
                                     <div className="flex items-center gap-3 flex-1 min-w-0">
                                         <Medal className="w-5 h-5 text-blue-500 shrink-0" />
-                                        <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight break-words">Todas las Certificaciones</h4>
+                                        <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight break-words">{t("recognitions.certs.modal_title")}</h4>
                                     </div>
                                     <button
                                         onClick={() => setIsCertModalOpen(false)}
@@ -483,7 +489,7 @@ const Recognitions = () => {
 
                                 <div className="p-6 border-t border-white/5 bg-white/5 text-center">
                                     <p className="text-[8px] uppercase tracking-[0.3em] text-slate-500 font-bold">
-                                        Desarrollo Profesional Continuo • Carlos Daniel
+                                        {t("recognitions.certs.footer")}
                                     </p>
                                 </div>
                             </motion.div>
@@ -519,8 +525,8 @@ const Recognitions = () => {
                                             <Trophy className="w-5 h-5 md:w-6 md:h-6 text-amber-500" />
                                         </div>
                                         <div className="min-w-0">
-                                            <h4 className="text-lg md:text-2xl font-black text-white uppercase tracking-tighter break-words leading-tight">Crónicas de Hackathons</h4>
-                                            <p className="text-[8px] md:text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mt-1 whitespace-normal">Hitos de Innovación & Ingeniería</p>
+                                            <h4 className="text-lg md:text-2xl font-black text-white uppercase tracking-tighter break-words leading-tight">{t("recognitions.hackathons.modal_title")}</h4>
+                                            <p className="text-[8px] md:text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mt-1 whitespace-normal">{t("recognitions.hackathons.modal_subtitle")}</p>
                                         </div>
                                     </div>
                                     <button
@@ -539,7 +545,7 @@ const Recognitions = () => {
 
                                 <div className="p-6 border-t border-white/5 bg-white/5 text-center">
                                     <p className="text-[9px] uppercase tracking-[0.4em] text-slate-500 font-bold">
-                                        Compitiendo en la vanguardia del ecosistema tecnológico
+                                        {t("recognitions.hackathons.footer")}
                                     </p>
                                 </div>
                             </motion.div>

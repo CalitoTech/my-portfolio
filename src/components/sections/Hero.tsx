@@ -2,8 +2,11 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import { SparklesText } from "@/components/ui/sparkles-text"
 import { TypingAnimation } from "@/components/ui/typing-animation"
 import { ChevronDown } from "lucide-react";
+import { useTranslation, Trans } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="relative z-10 flex flex-col items-center px-6 text-center w-full max-w-4xl">
       {/* 1. Badge Superior */}
@@ -14,7 +17,7 @@ const Hero = () => {
             <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
           </span>
           <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400">
-            Cofundador & Líder de Backend
+            {t('hero.badge')}
           </span>
         </div>
       </BlurFade>
@@ -34,7 +37,7 @@ const Hero = () => {
           cursorStyle="block"
           loop
         >
-          Desarrollador FullStack
+          {t('hero.role')}
         </TypingAnimation>
       </div>
 
@@ -43,11 +46,11 @@ const Hero = () => {
         <div className="mt-12 flex flex-wrap justify-center gap-6">
           <div className="px-4 py-1 border-l-2 border-green-500/50 bg-green-500/5 transition-colors hover:bg-green-500/10">
             <p className="text-xs font-bold tracking-widest text-slate-300 uppercase">Crediagro</p>
-            <p className="text-[10px] text-green-500 font-medium">Cofundador</p>
+            <p className="text-[10px] text-green-500 font-medium">{t('hero.crediagro_role')}</p>
           </div>
           <div className="px-4 py-1 border-l-2 border-blue-500/50 bg-blue-500/5 transition-colors hover:bg-blue-500/10">
             <p className="text-xs font-bold tracking-widest text-slate-300 uppercase">Agroo</p>
-            <p className="text-[10px] text-blue-500 font-medium">Backend Lead</p>
+            <p className="text-[10px] text-blue-500 font-medium">{t('hero.agroo_role')}</p>
           </div>
         </div>
       </BlurFade>
@@ -55,14 +58,15 @@ const Hero = () => {
       {/* 5. Descripción */}
       <BlurFade delay={0.8} inView>
         <p className="mt-6 mb-10 max-w-xl text-lg md:text-xl text-slate-400 font-light leading-relaxed">
-          Arquitecto de sistemas escalables y <span className="text-white">líder técnico</span>.
-          Transformando el sector agrícola con código de alto rendimiento.
+          <Trans i18nKey="hero.description">
+            Arquitecto de sistemas escalables y <span className="text-white font-medium">líder técnico</span>. Transformando el sector agrícola con código de alto rendimiento.
+          </Trans>
         </p>
       </BlurFade>
 
       <BlurFade delay={1} inView>
         <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
-          <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-500">Desliza hacia abajo</p>
+          <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-500">{t('hero.scroll')}</p>
           <ChevronDown className="h-5 w-5 text-blue-500" />
         </div>
       </BlurFade>

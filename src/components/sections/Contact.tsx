@@ -2,6 +2,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
 import { RetroGrid } from "@/components/ui/retro-grid";
 import { motion } from "motion/react";
+import { useTranslation, Trans } from "react-i18next";
 import {
     Mail,
     Linkedin,
@@ -13,6 +14,8 @@ import {
  * Final destination of the portfolio scroll.
  */
 const Contact = () => {
+    const { t } = useTranslation();
+
     return (
         <section id="contact-content" className="relative w-full min-h-screen flex flex-col items-center justify-between overflow-hidden bg-[#00030a] px-6 py-20">
             {/* Background Grid */}
@@ -22,7 +25,9 @@ const Contact = () => {
             <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center w-full max-w-4xl">
                 <BlurFade delay={0.1} inView>
                     <h3 className="text-5xl md:text-9xl font-black tracking-tighter text-white mb-12 leading-[0.8] uppercase">
-                        ¿Listo para <span className="text-blue-500 underline decoration-blue-500/20 underline-offset-8">escalar?</span>
+                        <Trans i18nKey="contact.cta">
+                            ¿Listo para <span className="text-blue-500 underline decoration-blue-500/20 underline-offset-8">escalar?</span>
+                        </Trans>
                     </h3>
                 </BlurFade>
 
@@ -37,7 +42,7 @@ const Contact = () => {
                                     '--primary-foreground': '#ffffff'
                                 } as React.CSSProperties}
                             >
-                                WhatsApp
+                                {t("contact.whatsapp")}
                             </InteractiveHoverButton>
                         </a>
 
@@ -75,14 +80,14 @@ const Contact = () => {
             {/* Footer - Strictly at the bottom */}
             <div className="relative z-20 w-full mt-auto pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-600 max-w-6xl mx-auto">
                 <p className="text-xs font-bold uppercase tracking-[0.3em] text-center md:text-left">
-                    © {new Date().getFullYear()} Carlos Navas · Architect & Founder
+                    © {new Date().getFullYear()} {t("contact.footer.title")}
                 </p>
                 <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-8 gap-y-4 text-xs font-bold uppercase tracking-widest transition-colors duration-300">
-                    <a href="#home" className="hover:text-blue-400 transition-colors">Inicio</a>
-                    <a href="#experience" className="hover:text-purple-400 transition-colors">Experiencia</a>
-                    <a href="#about" className="hover:text-emerald-400 transition-colors">Sobre Mí</a>
-                    <a href="#recognitions" className="hover:text-amber-400 transition-colors">Reconocimientos</a>
-                    <a href="#services" className="hover:text-cyan-400 transition-colors">Servicios</a>
+                    <a href="#home" className="hover:text-blue-400 transition-colors">{t("contact.nav.home")}</a>
+                    <a href="#experience" className="hover:text-purple-400 transition-colors">{t("contact.nav.experience")}</a>
+                    <a href="#about" className="hover:text-emerald-400 transition-colors">{t("contact.nav.about")}</a>
+                    <a href="#recognitions" className="hover:text-amber-400 transition-colors">{t("contact.nav.recognitions")}</a>
+                    <a href="#services" className="hover:text-cyan-400 transition-colors">{t("contact.nav.services")}</a>
                 </div>
             </div>
 

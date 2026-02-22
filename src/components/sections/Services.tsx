@@ -2,6 +2,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { Badge } from "@/components/ui/badge";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { motion } from "motion/react";
+import { useTranslation } from "react-i18next";
 import {
     Layers,
     Zap,
@@ -12,13 +13,15 @@ import {
 } from "lucide-react";
 
 const Services = () => {
+    const { t } = useTranslation();
+
     const services = [
         {
             Icon: Layers,
-            name: "Arquitectura Escalable",
-            description: "Sistemas distribuidos de alto rendimiento diseñados para el crecimiento masivo.",
+            name: t("services.items.scalable.name"),
+            description: t("services.items.scalable.description"),
             href: "#contact",
-            cta: "Explorar solución",
+            cta: t("services.items.scalable.cta"),
             background: (
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-600/30 via-transparent to-transparent opacity-100 transition-all duration-500 group-hover:scale-110" />
@@ -36,10 +39,10 @@ const Services = () => {
         },
         {
             Icon: Smartphone,
-            name: "Desarrollo Móvil",
-            description: "Experiencias nativas y multiplataforma pensadas para la escalabilidad.",
+            name: t("services.items.mobile.name"),
+            description: t("services.items.mobile.description"),
             href: "#contact",
-            cta: "Ver mobile",
+            cta: t("services.items.mobile.cta"),
             background: (
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-cyan-500/30 to-transparent opacity-80" />
@@ -54,10 +57,10 @@ const Services = () => {
         },
         {
             Icon: Zap,
-            name: "Automatización Crítica",
-            description: "Flujos autónomos de alta disponibilidad que eliminan cuellos de botella.",
+            name: t("services.items.automation.name"),
+            description: t("services.items.automation.description"),
             href: "#contact",
-            cta: "Optimizar",
+            cta: t("services.items.automation.cta"),
             background: (
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(245,158,11,0.3),transparent)] transition-opacity duration-500" />
@@ -75,10 +78,10 @@ const Services = () => {
         },
         {
             Icon: Cpu,
-            name: "Inteligencia Agéntica",
-            description: "IA aplicada que ejecuta y decide bajo estándares estratégicos.",
+            name: t("services.items.ai.name"),
+            description: t("services.items.ai.description"),
             href: "#contact",
-            cta: "Integrar IA",
+            cta: t("services.items.ai.cta"),
             background: (
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-bl from-emerald-500/20 via-transparent to-transparent" />
@@ -97,10 +100,10 @@ const Services = () => {
         },
         {
             Icon: Wrench,
-            name: "Mantenimiento Proactivo",
-            description: "Soporte dinámico y actualizaciones constantes para un funcionamiento impecable.",
+            name: t("services.items.maintenance.name"),
+            description: t("services.items.maintenance.description"),
             href: "#contact",
-            cta: "Saber más",
+            cta: t("services.items.maintenance.cta"),
             background: (
                 <div className="absolute inset-0 overflow-hidden">
                     <div className="absolute -bottom-10 -right-10 h-64 w-64 rounded-full bg-purple-600/20 blur-3xl opacity-80" />
@@ -119,10 +122,10 @@ const Services = () => {
             <BlurFade delay={0.1} inView>
                 <div className="text-center mb-4">
                     <Badge variant="outline" className="mb-4 border-white/10 bg-white/5 text-blue-400 uppercase tracking-[0.4em] font-bold px-4 py-1 text-[10px]">
-                        Estrategia & Soluciones
+                        {t("services.badge")}
                     </Badge>
                     <p className="max-w-2xl text-xl md:text-2xl text-slate-300 font-light leading-relaxed mx-auto italic">
-                        "Como arquitecto, mi enfoque trasciende el código: construyo sistemas que se convierten en el motor de tu negocio."
+                        "{t("services.quote")}"
                     </p>
                 </div>
             </BlurFade>
@@ -153,7 +156,7 @@ const Services = () => {
                 >
                     <AlertTriangle className="w-8 h-8 text-red-500 drop-shadow-[0_0_15px_rgba(239,68,68,0.7)]" />
                     <span className="text-[8px] font-black uppercase tracking-[0.3em] text-red-500/60 mt-10 group-hover:text-red-500 transition-colors">
-                        Siguiente
+                        {t("services.next")}
                     </span>
                 </motion.div>
             </BlurFade>

@@ -6,9 +6,11 @@ import {
   User,
   Zap,
   Layers,
-  Trophy
+  Trophy,
+  Languages
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 /**
  * ContactDock Component
@@ -16,15 +18,21 @@ import { cn } from "@/lib/utils";
  * and a sleek floating dock for mobile.
  */
 const ContactDock = () => {
+  const { t, i18n } = useTranslation();
   const [isHovered, setIsHovered] = useState(false);
 
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'es' ? 'en' : 'es';
+    i18n.changeLanguage(newLang);
+  };
+
   const navItems = [
-    { id: "home", title: "Inicio", icon: <Home className="w-5 h-5" />, href: "#home" },
-    { id: "experience", title: "Experiencia", icon: <Briefcase className="w-5 h-5" />, href: "#experience" },
-    { id: "about", title: "Sobre Mí", icon: <User className="w-5 h-5" />, href: "#about" },
-    { id: "recognitions", title: "Reconocimientos", icon: <Trophy className="w-5 h-5" />, href: "#recognitions" },
-    { id: "services", title: "Servicios", icon: <Layers className="w-5 h-5" />, href: "#services" },
-    { id: "contact", title: "Contacto", icon: <Zap className="w-5 h-5" />, href: "#contact" }
+    { id: "home", title: t("contact.nav.home"), icon: <Home className="w-5 h-5" />, href: "#home" },
+    { id: "experience", title: t("contact.nav.experience"), icon: <Briefcase className="w-5 h-5" />, href: "#experience" },
+    { id: "about", title: t("contact.nav.about"), icon: <User className="w-5 h-5" />, href: "#about" },
+    { id: "recognitions", title: t("contact.nav.recognitions"), icon: <Trophy className="w-5 h-5" />, href: "#recognitions" },
+    { id: "services", title: t("contact.nav.services"), icon: <Layers className="w-5 h-5" />, href: "#services" },
+    { id: "contact", title: t("contact.nav.contact") || "Contacto", icon: <Zap className="w-5 h-5" />, href: "#contact" }
   ];
 
   return (
@@ -49,7 +57,7 @@ const ContactDock = () => {
               "text-[8px] font-black uppercase tracking-[0.3em] text-slate-600 mb-2 px-3 transition-opacity duration-300",
               isHovered ? "opacity-100" : "opacity-0 invisible"
             )}>
-              Menú
+              {t("contact.nav.title") || "Menú"}
             </p>
             {navItems.map((item) => (
               <a
@@ -74,6 +82,29 @@ const ContactDock = () => {
                 </AnimatePresence>
               </a>
             ))}
+
+            {/* Language Switcher Button (Desktop) */}
+            <hr className="my-2 border-white/5" />
+            <button
+              onClick={toggleLanguage}
+              className="flex items-center gap-4 p-3 rounded-2xl transition-all duration-300 group relative text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 cursor-pointer"
+            >
+              <div className="flex-shrink-0 transition-transform duration-300 group-hover:scale-110">
+                <Languages className="w-5 h-5" />
+              </div>
+              <AnimatePresence>
+                {isHovered && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -10 }}
+                    className="text-[10px] font-black uppercase tracking-[0.15em] whitespace-nowrap"
+                  >
+                    {i18n.language === 'es' ? 'English' : 'Español'}
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </button>
           </div>
         </motion.div>
       </div>
@@ -96,6 +127,13 @@ const ContactDock = () => {
               </div>
             </a>
           ))}
+          <div className="w-[1px] h-6 bg-white/10 mx-1" />
+          <button
+            onClick={toggleLanguage}
+            className="flex items-center justify-center p-3 rounded-full text-blue-400 hover:text-blue-300 transition-all active:scale-90 cursor-pointer"
+          >
+            <Languages className="w-5 h-5" />
+          </button>
         </motion.div>
       </div>
     </div>

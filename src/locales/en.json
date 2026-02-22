@@ -1,0 +1,241 @@
+{
+    "nav": {
+        "start": "Home",
+        "experience": "Experience",
+        "about": "About Me",
+        "recognitions": "Recognitions",
+        "services": "Services",
+        "menu": "Menu",
+        "contact": "Contact"
+    },
+    "hero": {
+        "badge": "Cofounder & Backend Lead",
+        "role": "FullStack Developer",
+        "crediagro_role": "Cofounder",
+        "agroo_role": "Backend Lead",
+        "description": "Scalable systems architect and <1>technical leader</1>. Transforming the agricultural sector with high-performance code.",
+        "scroll": "Scroll down"
+    },
+    "about": {
+        "badge": "About Me",
+        "title": "Automation <1>&</1> Scalability",
+        "role_title": "Solutions Architect",
+        "bio": "My approach is simple: if a process can be automated, it must be. I specialize in transforming complex operations into autonomous digital flows capable of scaling without limits.",
+        "stats": {
+            "efficiency": "Efficiency Increase",
+            "active_users": "Active Users",
+            "uptime": "Systems Uptime",
+            "digitalized": "Digitalized Processes"
+        },
+        "stack": {
+            "frontend": "Frontend",
+            "backend": "Backend & DB",
+            "learning": "Learning",
+            "tools": "Tools"
+        }
+    },
+    "services": {
+        "badge": "Strategy & Solutions",
+        "quote": "As an architect, my focus transcends code: I build systems that become the engine of your business.",
+        "next": "Next",
+        "items": {
+            "scalable": {
+                "name": "Scalable Architecture",
+                "description": "High-performance distributed systems designed for massive growth.",
+                "cta": "Explore solution"
+            },
+            "mobile": {
+                "name": "Mobile Development",
+                "description": "Native and multiplatform experiences designed for scalability.",
+                "cta": "View mobile"
+            },
+            "automation": {
+                "name": "Critical Automation",
+                "description": "High-availability autonomous flows that eliminate bottlenecks.",
+                "cta": "Optimize"
+            },
+            "ai": {
+                "name": "Agentic Intelligence",
+                "description": "Applied AI that executes and decides under strategic standards.",
+                "cta": "Integrate AI"
+            },
+            "maintenance": {
+                "name": "Proactive Maintenance",
+                "description": "Dynamic support and constant updates for flawless performance.",
+                "cta": "Learn more"
+            }
+        }
+    },
+    "experience": {
+        "badge": "Professional Trajectory",
+        "title": "Ecosystems <1>&</1> Leadership",
+        "description": "Explore the pillars of my technical experience. Click on each to go deeper into the <1>impact and architecture</1>.",
+        "project_anatomy": "Project Anatomy",
+        "view_case_study": "View Case Study",
+        "validated_ecosystem": "Validated Ecosystem",
+        "tech_stack": "Tech Stack",
+        "career_milestones": "Career Milestones",
+        "career_desc": "This section highlights projects that, although independent, are part of the core of my technical training and ability to solve complex custom problems.",
+        "view_system": "View System",
+        "projects": {
+            "crediagro": {
+                "roles": [
+                    "Cofounder",
+                    "Backend Lead"
+                ],
+                "period": "Fintech / AgroTech",
+                "summary": "Leadership in the democratization of agricultural credit, impacting thousands of producers through digital financial inclusion.",
+                "details": "As the founding architect, I led the creation of the infrastructure that now allows more than 5,000 producers to access interest-free financing. I materialized the vision of 'Agrooberto', a virtual assistant via WhatsApp that digitized 100% of the credit process, eliminating liquidity barriers and bureaucracy. This ecosystem has not only provided banking services to underserved sectors but has driven a 30% increase in transactions in partner stores, redefining the agricultural economy in Venezuela.",
+                "tags": [
+                    "Financial Inclusion",
+                    "Scalable Fintech",
+                    "Agrooberto AI"
+                ]
+            },
+            "agroo": {
+                "roles": [
+                    "Backend Lead"
+                ],
+                "period": "AgroTech / AI",
+                "summary": "Cross-functional software architect responsible for the technical execution and scaling of the entire digital ecosystem.",
+                "details": "At Agroo, I execute a 360° vision, operating as the technical pillar that supports everything from the transactional core of the business to the development of high-fidelity custom mobile applications for events and market experiences. My work consists of transforming complex ideas into functional technical realities, leading development on all fronts and ensuring the robustness of each solution launched to the market. I am responsible for the technical feasibility and performance of every product released under the brand seal, ensuring that technology is always the engine driving the business.",
+                "tags": [
+                    "Transversal Engineering",
+                    "Full-Stack Execution",
+                    "Scalable Solutions"
+                ]
+            },
+            "corpoeureka": {
+                "roles": [
+                    "Junior FullStack Developer"
+                ],
+                "period": "ERP / AI",
+                "summary": "Development and optimization of business solutions on the Odoo ecosystem.",
+                "details": "At Corpoeureka, my main focus is the development and maintenance of critical modules within Odoo, ensuring the stability and efficiency of business processes. Thanks to the results obtained in projects like Agroo and Crediagro, my technical contributions often serve as a reference for the implementation of new functionalities. I am dedicated to solving complex logic problems and collaborating on the structural sanitation of the code, providing a proactive vision that helps raise the firm's regional standards.",
+                "tags": [
+                    "Odoo Development",
+                    "FullStack",
+                    "Logic Solving"
+                ]
+            },
+            "otros": {
+                "company": "Other Experiences",
+                "roles": [
+                    "Solutions Architect"
+                ],
+                "period": "Educational & Industrial",
+                "summary": "Consolidation of critical milestones in automation and industrial digitization.",
+                "details": "This space brings together key projects where I have applied my knowledge to solve specific problems in the educational and industrial sectors, from the automation of administrative processes with N8N to the digital transformation of occupational health.",
+                "tags": [
+                    "Automation",
+                    "Industry 4.0",
+                    "Data Digitization"
+                ],
+                "subProjects": {
+                    "fermin": {
+                        "title": "Fermín Toro School",
+                        "details": "Total digitization of registration processes and administrative communication using WhatsApp API and automated flows with N8N, eliminating manual processes and optimizing representative care."
+                    },
+                    "oleica": {
+                        "title": "OLEICA C.A.",
+                        "details": "Digital transformation of the Occupational Health department. I designed and implemented a system for the massive digitization of medical records and the automated generation of morbidity reports, allowing for real-time statistical analysis."
+                    }
+                }
+            }
+        }
+    },
+    "projects": {
+        "title": "Featured Systems",
+        "subtitle": "Robust solutions designed to scale and optimize processes in the agricultural sector.",
+        "items": {
+            "crediagro": {
+                "name": "Crediagro Core",
+                "description": "Microservices architecture for agricultural credit management.",
+                "cta": "View architecture"
+            },
+            "agroo": {
+                "name": "Agroo API",
+                "description": "Scalable API with Node.js and PostgreSQL.",
+                "cta": "Docs"
+            },
+            "mobile": {
+                "name": "Mobile Sync",
+                "description": "Offline synchronization system for areas without internet.",
+                "cta": "Demo"
+            },
+            "dashboard": {
+                "name": "Administrative Dashboard",
+                "description": "Real-time control panel for crop analytics.",
+                "cta": "Explore"
+            }
+        }
+    },
+    "recognitions": {
+        "certs": {
+            "title": "Certifications",
+            "description": "Continuous validation by global leaders. Only the most recent are shown.",
+            "button_all": "View all certifications",
+            "modal_title": "All Certifications",
+            "footer": "Continuous Professional Development • Carlos Daniel",
+            "items": {
+                "tsu": {
+                    "name": "TSU in Informatics",
+                    "description": "Graduated from UPTP 'Juan de Jesus Montilla'. Solid foundation in software and systems engineering.",
+                    "origin": "UPTP"
+                },
+                "claude": {
+                    "name": "Claude Code in Action",
+                    "description": "Advanced certification in the use of Claude Code for agentic engineering and accelerated development.",
+                    "origin": "Anthropic"
+                },
+                "alegria": {
+                    "name": "Hackathon AlegrIA 2025",
+                    "description": "TOP 10 in the first Vibe Coding competition in Venezuela. Selected among 1500+ applicants.",
+                    "origin": "AlegrIA Labs"
+                },
+                "corpoeureka": {
+                    "name": "Hackathon CorpoEureka",
+                    "description": "2nd National Place in the Backend discipline. Robust and scalable architecture.",
+                    "origin": "CorpoEureka"
+                }
+            }
+        },
+        "hackathons": {
+            "title": "Hackathons",
+            "description": "High-level competitions where architecture and innovation are put to the test.",
+            "button_history": "View hackathon history",
+            "modal_title": "Hackathon Chronicles",
+            "modal_subtitle": "Innovation & Engineering Milestones",
+            "footer": "Competing at the forefront of the technological ecosystem",
+            "items": {
+                "alegria": {
+                    "name": "Hackathon AlegrIA 2025",
+                    "description": "First Vibe Coding Hackathon in Venezuela. Selected for the TOP 10 among 1,500+ applicants in a competition with $50,000 in prizes. A networking milestone with judges from Ribbit Capital, Cashea, Yummy, Slash, Lovable, Startup Venezuela Summit.",
+                    "badge": "National Milestone",
+                    "stats": "TOP 10"
+                },
+                "corpoeureka": {
+                    "name": "Hackathon CorpoEureka",
+                    "description": "Winner of 2nd national place in the Backend discipline within the CorpoEureka technical competition.",
+                    "badge": "2ND PLACE BACKEND"
+                }
+            }
+        }
+    },
+    "contact": {
+        "cta": "Ready to <1>scale?</1>",
+        "whatsapp": "WhatsApp",
+        "nav": {
+            "title": "Metadata",
+            "home": "Home",
+            "experience": "Experience",
+            "about": "About Me",
+            "recognitions": "Recognitions",
+            "services": "Services",
+            "contact": "Contact"
+        },
+        "footer": {
+            "title": "Carlos Navas · Architect & Founder"
+        }
+    }
+}

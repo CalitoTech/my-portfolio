@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { ShineBorder } from "@/components/ui/shine-border";
 import { motion, AnimatePresence } from "motion/react";
+import { useTranslation, Trans } from "react-i18next";
 import {
   Layers,
   Database,
@@ -53,87 +54,8 @@ interface Project {
   subProjects?: SubProject[];
 }
 
-const experiences: Project[] = [
-  {
-    id: "crediagro",
-    company: "Crediagro",
-    roles: ["Cofundador", "Backend Lead"],
-    period: "Fintech / AgroTech",
-    url: "https://crediagro.app/",
-    summary: "Liderazgo en la democratización del crédito agrícola, impactando a miles de productores mediante inclusión financiera digital.",
-    details: "Como arquitecto fundador, lideré la creación de la infraestructura que hoy permite a más de 5,000 productores acceder a financiamiento sin intereses. Materialicé la visión de 'Agrooberto', un asistente virtual vía WhatsApp que digitalizó el 100% del proceso crediticio, eliminando barreras de liquidez y burocracia. Este ecosistema no solo ha bancarizado a sectores desatendidos, sino que ha impulsado un incremento del 30% en las transacciones de tiendas aliadas, redefiniendo la economía del agro en Venezuela.",
-    tags: ["Financial Inclusion", "Scalable Fintech", "Agrooberto AI"],
-    stack: ["N8N", "React Native", "NextJS", "Odoo", "OWL", "Python", "PostgreSQL"],
-    logo: logoCrediagro,
-    image: imgCrediagro,
-    shineColor: ["#22c55e", "#16a34a"], // Green
-    icon: <Star className="w-5 h-5 text-green-400" />
-  },
-  {
-    id: "agroo",
-    company: "Agroo",
-    roles: ["Backend Lead"],
-    period: "AgroTech / AI",
-    url: "https://agroo.com.ve/",
-    summary: "Arquitecto de software transversal responsable de la ejecución técnica y el escalamiento de todo el ecosistema digital.",
-    details: "En Agroo ejecuto una visión 360°, operando como el pilar técnico que sostiene desde el núcleo transaccional del negocio hasta el desarrollo de aplicaciones móviles personalizadas de alta fidelidad para eventos y experiencias de mercado. Mi labor consiste en transformar ideas complejas en realidades técnicas funcionales, liderando el desarrollo en todos sus frentes y garantizando la robustez de cada solución lanzada al mercado. Soy responsable de la viabilidad técnica y el rendimiento de cada producto que sale bajo el sello de la marca, asegurando que la tecnología sea siempre el motor que impulsa el negocio.",
-    tags: ["Transversal Engineering", "Full-Stack Execution", "Scalable Solutions"],
-    stack: ["N8N", "React Native", "NextJS", "Odoo", "OWL", "AI Cognitive", "Python"],
-    logo: logoAgroo,
-    image: imgAgroo,
-    shineColor: ["#3b82f6", "#2563eb"], // Blue
-    icon: <Star className="w-5 h-5 text-blue-400" />
-  },
-  {
-    id: "corpoeureka",
-    company: "Corpoeureka",
-    roles: ["Junior FullStack Developer"],
-    period: "ERP / AI",
-    url: "https://corpoeureka.com/ve",
-    summary: "Desarrollo y optimización de soluciones empresariales sobre el ecosistema Odoo.",
-    details: "En Corpoeureka, mi enfoque principal es el desarrollo y mantenimiento de módulos críticos dentro de Odoo, garantizando la estabilidad y eficiencia de los procesos de negocio. Gracias a los resultados obtenidos en proyectos como Agroo y Crediagro, mis aportes técnicos suelen servir como referencia para la implementación de nuevas funcionalidades. Me dedico a la resolución de problemas complejos de lógica y a colaborar en el saneamiento estructural del código, aportando una visión proactiva que ayuda a elevar los estándares regionales de la firma.",
-    tags: ["Odoo Development", "FullStack", "Logic Solving"],
-    stack: ["Odoo", "Jasper Studios", "OWL", "Python", "PostgreSQL", "XML", "API Integration"],
-    logo: logoCorpoeureka,
-    image: imgCorpoeureka,
-    shineColor: ["#a855f7", "#7c3aed"], // Purple
-    icon: <Star className="w-5 h-5 text-purple-400" />
-  },
-  {
-    id: "otros",
-    company: "Otras Experiencias",
-    roles: ["Arquitecto de Soluciones"],
-    period: "Educativo & Industrial",
-    summary: "Consolidación de hitos críticos en automatización y digitalización industrial.",
-    details: "Este espacio reúne proyectos clave donde he aplicado mi conocimiento para resolver problemas específicos en los sectores educativo e industrial, desde la automatización de procesos administrativos con N8N hasta la transformación digital de la salud ocupacional.",
-    tags: ["Automation", "Industry 4.0", "Data Digitization"],
-    stack: ["Laravel", "NextJS", "N8N", "WhatsApp API", "Javascript", "CSS"],
-    logo: logoFermin, // Fallback
-    logos: [logoFermin, logoOleica],
-    image: imgFermin, // Fallback
-    shineColor: ["#f59e0b", "#d97706"], // Amber
-    icon: <Plus className="w-5 h-5 text-amber-400" />,
-    subProjects: [
-      {
-        title: "U.E.C. Fermín Toro",
-        details: "Digitalización total de procesos de inscripción y comunicación administrativa mediante WhatsApp API y flujos automatizados con N8N, eliminando procesos manuales y optimizando la atención al representante.",
-        image: imgFermin,
-        logo: logoFermin,
-        stack: ["N8N", "WhatsApp API", "Javascript"],
-        url: "https://sistema.uefermintoroaraure.com"
-      },
-      {
-        title: "OLEICA C.A.",
-        details: "Transformación digital del departamento de Salud Ocupacional. Diseñé e implementé un sistema para la digitalización masiva de expedientes médicos y la generación automatizada de reportes de morbilidad, permitiendo análisis estadísticos en tiempo real.",
-        image: imgOleica,
-        logo: logoOleica,
-        stack: ["Laravel", "HTML", "CSS", "Javascript"]
-      }
-    ]
-  }
-];
-
 const Experience = () => {
+  const { t } = useTranslation();
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [zoomedImage, setZoomedImage] = useState<string | null>(null);
@@ -167,18 +89,104 @@ const Experience = () => {
     };
   }, [selectedProject, zoomedImage]);
 
+  const experiences: Project[] = [
+    {
+      id: "crediagro",
+      company: "Crediagro",
+      roles: t('experience.projects.crediagro.roles', { returnObjects: true }) as string[],
+      period: t('experience.projects.crediagro.period'),
+      url: "https://crediagro.app/",
+      summary: t('experience.projects.crediagro.summary'),
+      details: t('experience.projects.crediagro.details'),
+      tags: t('experience.projects.crediagro.tags', { returnObjects: true }) as string[],
+      stack: ["N8N", "React Native", "NextJS", "Odoo", "OWL", "Python", "PostgreSQL"],
+      logo: logoCrediagro,
+      image: imgCrediagro,
+      shineColor: ["#22c55e", "#16a34a"],
+      icon: <Star className="w-5 h-5 text-green-400" />
+    },
+    {
+      id: "agroo",
+      company: "Agroo",
+      roles: t('experience.projects.agroo.roles', { returnObjects: true }) as string[],
+      period: t('experience.projects.agroo.period'),
+      url: "https://agroo.com.ve/",
+      summary: t('experience.projects.agroo.summary'),
+      details: t('experience.projects.agroo.details'),
+      tags: t('experience.projects.agroo.tags', { returnObjects: true }) as string[],
+      stack: ["N8N", "React Native", "NextJS", "Odoo", "OWL", "AI Cognitive", "Python"],
+      logo: logoAgroo,
+      image: imgAgroo,
+      shineColor: ["#3b82f6", "#2563eb"],
+      icon: <Star className="w-5 h-5 text-blue-400" />
+    },
+    {
+      id: "corpoeureka",
+      company: "Corpoeureka",
+      roles: t('experience.projects.corpoeureka.roles', { returnObjects: true }) as string[],
+      period: t('experience.projects.corpoeureka.period'),
+      url: "https://corpoeureka.com/ve",
+      summary: t('experience.projects.corpoeureka.summary'),
+      details: t('experience.projects.corpoeureka.details'),
+      tags: t('experience.projects.corpoeureka.tags', { returnObjects: true }) as string[],
+      stack: ["Odoo", "Jasper Studios", "OWL", "Python", "PostgreSQL", "XML", "API Integration"],
+      logo: logoCorpoeureka,
+      image: imgCorpoeureka,
+      shineColor: ["#a855f7", "#7c3aed"],
+      icon: <Star className="w-5 h-5 text-purple-400" />
+    },
+    {
+      id: "otros",
+      company: t('experience.projects.otros.company'),
+      roles: t('experience.projects.otros.roles', { returnObjects: true }) as string[],
+      period: t('experience.projects.otros.period'),
+      summary: t('experience.projects.otros.summary'),
+      details: t('experience.projects.otros.details'),
+      tags: t('experience.projects.otros.tags', { returnObjects: true }) as string[],
+      stack: ["Laravel", "NextJS", "N8N", "WhatsApp API", "Javascript", "CSS"],
+      logo: logoFermin,
+      logos: [logoFermin, logoOleica],
+      image: imgFermin,
+      shineColor: ["#f59e0b", "#d97706"],
+      icon: <Plus className="w-5 h-5 text-amber-400" />,
+      subProjects: [
+        {
+          title: t('experience.projects.otros.subProjects.fermin.title'),
+          details: t('experience.projects.otros.subProjects.fermin.details'),
+          image: imgFermin,
+          logo: logoFermin,
+          stack: ["N8N", "WhatsApp API", "Javascript"],
+          url: "https://sistema.uefermintoroaraure.com"
+        },
+        {
+          title: t('experience.projects.otros.subProjects.oleica.title'),
+          details: t('experience.projects.otros.subProjects.oleica.details'),
+          image: imgOleica,
+          logo: logoOleica,
+          stack: ["Laravel", "HTML", "CSS", "Javascript"]
+        }
+      ]
+    }
+  ];
+
+  // ... (rest of logic)
+
   return (
     <div className="w-full max-w-6xl px-6 flex flex-col items-center">
       <BlurFade delay={0.2} inView>
         <div className="mb-4 flex flex-col items-center text-center">
           <Badge variant="outline" className="mb-4 border-white/10 bg-white/5 text-slate-400 uppercase tracking-[0.3em] font-bold px-4 py-1">
-            Trayectoria Profesional
+            {t("experience.badge")}
           </Badge>
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white mb-4">
-            Ecosistemas <span className="text-blue-500">&</span> Liderazgo
+            <Trans i18nKey="experience.title">
+              Ecosistemas <span className="text-blue-500">&</span> Liderazgo
+            </Trans>
           </h2>
           <p className="max-w-3xl text-xl text-slate-400 font-light leading-relaxed">
-            Explora los pilares de mi experiencia técnica. Haz clic en cada uno para profundizar en el <span className="text-white font-medium italic">impacto y arquitectura</span>.
+            <Trans i18nKey="experience.description">
+              Explora los pilares de mi experiencia técnica. Haz clic en cada uno para profundizar en el <span className="text-white font-medium italic">impacto y arquitectura</span>.
+            </Trans>
           </p>
         </div>
       </BlurFade>
@@ -310,7 +318,7 @@ const Experience = () => {
                     <div className="space-y-6">
                       <div className="flex items-center gap-3 text-white">
                         <Layers className="w-5 h-5 text-blue-500" />
-                        <h4 className="text-xl font-bold uppercase tracking-tight">Anatomía del Proyecto</h4>
+                        <h4 className="text-xl font-bold uppercase tracking-tight">{t("experience.project_anatomy")}</h4>
                       </div>
                       <p className="text-lg text-slate-300 leading-relaxed font-light">
                         {selectedProject.details}
@@ -346,7 +354,7 @@ const Experience = () => {
                                       rel="noopener noreferrer"
                                       className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white hover:text-blue-400 transition-colors group/link"
                                     >
-                                      Ver Sistema <ExternalLink className="w-3 h-3 transition-transform group-hover/link:translate-x-1" />
+                                      {t("experience.view_system")} <ExternalLink className="w-3 h-3 transition-transform group-hover/link:translate-x-1" />
                                     </a>
                                   )}
                                 </div>
@@ -405,18 +413,18 @@ const Experience = () => {
                                 rel="noopener noreferrer"
                                 className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-white text-black font-black uppercase text-xs hover:bg-blue-500 hover:text-white transition-all shadow-xl shadow-white/5 active:scale-95"
                               >
-                                <ExternalLink className="w-4 h-4" /> Ver Caso de Estudio
+                                <ExternalLink className="w-4 h-4" /> {t("experience.view_case_study")}
                               </a>
                             )}
                             <div className="flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-slate-400 font-black uppercase text-[10px] tracking-widest cursor-default">
-                              <Database className="w-4 h-4" /> Ecosistema Validado
+                              <Database className="w-4 h-4" /> {t("experience.validated_ecosystem")}
                             </div>
                           </div>
 
                           <div className="pt-4 space-y-4">
                             <div className="flex items-center gap-3 text-white border-t border-white/5 pt-4">
                               <Database className="w-4 h-4 text-blue-500" />
-                              <h4 className="text-xs font-bold uppercase tracking-widest">Stack Tecnológico</h4>
+                              <h4 className="text-xs font-bold uppercase tracking-widest">{t("experience.tech_stack")}</h4>
                             </div>
                             <div className="flex flex-wrap gap-2">
                               {selectedProject.stack.map(tech => (
@@ -431,10 +439,10 @@ const Experience = () => {
                         <div className="p-8 rounded-[2.5rem] bg-gradient-to-br from-white/5 to-transparent border border-white/10 space-y-6 shadow-2xl">
                           <div className="flex items-center gap-3 text-white">
                             <Star className="w-5 h-5 text-amber-500" />
-                            <h4 className="text-xl font-black uppercase tracking-tight text-amber-500">Hitos de Carrera</h4>
+                            <h4 className="text-xl font-black uppercase tracking-tight text-amber-500">{t("experience.career_milestones")}</h4>
                           </div>
                           <p className="text-sm text-slate-400 leading-relaxed font-light">
-                            Esta sección destaca proyectos que, aunque independientes, forman parte del núcleo de mi formación técnica y capacidad para resolver problemas complejos a medida.
+                            {t("experience.career_desc")}
                           </p>
                           <div className="grid grid-cols-1 gap-3 pt-4">
                             {selectedProject.tags.map(tag => (
