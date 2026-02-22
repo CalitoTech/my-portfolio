@@ -9,11 +9,14 @@ import {
     Zap,
     ExternalLink,
     Plus,
-    X
+    X,
+    ChevronLeft,
+    ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
+import { Maximize2 } from "lucide-react";
 
 /**
  * Recognitions & Hackathons Section
@@ -117,7 +120,7 @@ const hackathons: HackathonItem[] = [
     },
     {
         name: "Hackathon CorpoEureka",
-        description: "Competencia nacional dual (Frontend/Backend). Destacado por arquitectura de microservicios resiliente y escalable. Enfoque en optimización de procesos de negocio críticos.",
+        description: "Ganador del 2do lugar nacional en la disciplina de Backend dentro de la competencia técnica de CorpoEureka.",
         badgeValue: "2DO LUGAR BACKEND",
         badgeColor: "border-purple-500/30 text-purple-400",
         icon: <Award className="w-8 h-8 text-purple-500" />,
@@ -167,7 +170,56 @@ const CertificationCard = ({ item, isCompact = false }: { item: RecognitionItem;
     );
 };
 
-const HackathonSummaryCard = ({ item }: { item: HackathonItem }) => {
+const HorizontalScroll = ({ children }: { children: React.ReactNode }) => {
+    const scrollRef = useRef<HTMLDivElement>(null);
+
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollRef.current) {
+            const { scrollLeft, clientWidth } = scrollRef.current;
+            const scrollTo = direction === 'left'
+                ? scrollLeft - clientWidth * 0.7
+                : scrollLeft + clientWidth * 0.7;
+            scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+        }
+    };
+
+    return (
+        <div className="group/scroll relative w-full">
+            {/* Gradient Overlays for depth */}
+            <div className="absolute left-0 top-0 bottom-4 w-12 bg-gradient-to-r from-[#00030a] to-transparent z-10 pointer-events-none opacity-0 group-hover/scroll:opacity-100 transition-opacity" />
+            <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#00030a] to-transparent z-10 pointer-events-none opacity-0 group-hover/scroll:opacity-100 transition-opacity" />
+
+            {/* Navigation Buttons (Desktop only) */}
+            <button
+                onClick={() => scroll('left')}
+                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/60 border border-white/10 text-white opacity-0 group-hover/scroll:opacity-100 hover:bg-black/80 transition-all hidden md:flex items-center justify-center backdrop-blur-md"
+            >
+                <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button
+                onClick={() => scroll('right')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/60 border border-white/10 text-white opacity-0 group-hover/scroll:opacity-100 hover:bg-black/80 transition-all hidden md:flex items-center justify-center backdrop-blur-md"
+            >
+                <ChevronRight className="w-5 h-5" />
+            </button>
+
+
+
+            <div
+                ref={scrollRef}
+                className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory no-scrollbar hover:custom-scrollbar-mini transition-all"
+                style={{
+                    scrollbarWidth: 'thin',
+                    scrollbarColor: 'rgba(255,255,255,0.1) transparent'
+                }}
+            >
+                {children}
+            </div>
+        </div>
+    );
+};
+
+const HackathonSummaryCard = ({ item, onImageClick }: { item: HackathonItem; onImageClick: (url: string) => void }) => {
     return (
         <div
             className="group relative rounded-3xl border border-white/10 bg-[#0a0f18]/80 backdrop-blur-md p-6 md:p-8 flex flex-col gap-6 shadow-xl cursor-default"
@@ -195,17 +247,30 @@ const HackathonSummaryCard = ({ item }: { item: HackathonItem }) => {
                 {item.description}
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            <HorizontalScroll>
                 {item.image || (item.visuals && item.visuals.length > 0) ? (
                     <>
                         {item.image && (
-                            <div className="w-32 aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border border-white/10 flex-shrink-0">
-                                <img src={item.image} alt="" className="w-full h-full object-cover" />
+                            <div
+                                onClick={() => onImageClick(item.image!)}
+                                className="group/img relative w-64 md:w-80 aspect-video bg-zinc-900 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 cursor-zoom-in snap-center"
+                            >
+                                <img src={item.image} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110" />
+                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                    <Maximize2 className="w-6 h-6 text-white" />
+                                </div>
                             </div>
                         )}
                         {item.visuals?.map((v, i) => (
-                            <div key={i} className="w-32 aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border border-white/10 flex-shrink-0">
-                                <img src={v} alt="" className="w-full h-full object-cover" />
+                            <div
+                                key={i}
+                                onClick={() => onImageClick(v)}
+                                className="group/img relative w-64 md:w-80 aspect-video bg-zinc-900 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 cursor-zoom-in snap-center"
+                            >
+                                <img src={v} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110" />
+                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                    <Maximize2 className="w-6 h-6 text-white" />
+                                </div>
                             </div>
                         ))}
                     </>
@@ -214,7 +279,7 @@ const HackathonSummaryCard = ({ item }: { item: HackathonItem }) => {
                         <span className="text-[8px] uppercase tracking-widest text-slate-600 font-black">Sin fotos</span>
                     </div>
                 )}
-            </div>
+            </HorizontalScroll>
         </div>
     );
 };
@@ -222,12 +287,13 @@ const HackathonSummaryCard = ({ item }: { item: HackathonItem }) => {
 const Recognitions = () => {
     const [isCertModalOpen, setIsCertModalOpen] = useState(false);
     const [isHackModalOpen, setIsHackModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const initialCerts = certifications.slice(0, 4);
     const featuredHackathon = hackathons.find(h => h.isFeatured);
 
     // Scroll Lock effect
     useEffect(() => {
-        const isModalOpen = isCertModalOpen || isHackModalOpen;
+        const isModalOpen = isCertModalOpen || isHackModalOpen || !!selectedImage;
         const mainElement = document.querySelector('main');
         const sectionElement = document.getElementById('recognitions');
 
@@ -325,60 +391,35 @@ const Recognitions = () => {
                                             {featuredHackathon.description}
                                         </p>
 
-                                        {featuredHackathon.video ? (
-                                            <div className="mt-6 grid grid-cols-2 gap-4">
-                                                <div className="w-full">
-                                                    <HeroVideoDialog
-                                                        className="w-full"
-                                                        animationStyle="from-center"
-                                                        videoSrc={featuredHackathon.video}
-                                                        thumbnailAlt={featuredHackathon.name}
+                                        <HorizontalScroll>
+                                            <div className="w-[85%] md:w-[70%] flex-shrink-0 snap-center">
+                                                <HeroVideoDialog
+                                                    className="w-full"
+                                                    animationStyle="from-center"
+                                                    videoSrc={featuredHackathon.video}
+                                                    thumbnailAlt={featuredHackathon.name}
+                                                />
+                                            </div>
+                                            {featuredHackathon.visuals && featuredHackathon.visuals.length > 0 && featuredHackathon.visuals.map((v, i) => (
+                                                <div
+                                                    key={i}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setSelectedImage(v);
+                                                    }}
+                                                    className="group/img relative w-[85%] md:w-[70%] aspect-video rounded-xl overflow-hidden border border-white/10 cursor-zoom-in hover:border-amber-500/50 transition-all shrink-0 snap-center"
+                                                >
+                                                    <img
+                                                        src={v}
+                                                        alt=""
+                                                        className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110"
                                                     />
+                                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                                                        <Maximize2 className="w-8 h-8 text-white" />
+                                                    </div>
                                                 </div>
-                                                {featuredHackathon.visuals && featuredHackathon.visuals.length > 0 && (
-                                                    <div
-                                                        onClick={(e) => {
-                                                            e.stopPropagation();
-                                                            setIsHackModalOpen(true);
-                                                        }}
-                                                        className="group/more relative w-full aspect-video rounded-xl overflow-hidden border border-white/10 cursor-pointer hover:border-amber-500/50 transition-all shrink-0"
-                                                    >
-                                                        <img
-                                                            src={alegImg2}
-                                                            alt="Ver más fotos"
-                                                            className="w-full h-full object-cover blur-[2px] opacity-30 group-hover:scale-110 transition-transform duration-700"
-                                                        />
-                                                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 group-hover:bg-black/20 transition-colors">
-                                                            <Plus className="w-6 h-6 md:w-8 md:h-8 text-white/50 group-hover:text-white transition-colors mb-1 md:mb-2" />
-                                                            <span className="text-[10px] md:text-xs font-black text-white tracking-[0.2em] md:tracking-[0.3em] text-center px-2">
-                                                                VER GALERÍA ({featuredHackathon.visuals.length}+)
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            <div className="flex flex-wrap gap-3 mt-4">
-                                                {featuredHackathon.image || (featuredHackathon.visuals && featuredHackathon.visuals.length > 0) ? (
-                                                    <>
-                                                        {featuredHackathon.image && (
-                                                            <div className="w-32 aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border border-white/10 flex-shrink-0">
-                                                                <img src={featuredHackathon.image} alt="" className="w-full h-full object-cover" />
-                                                            </div>
-                                                        )}
-                                                        {featuredHackathon.visuals?.map((v, i) => (
-                                                            <div key={i} className="w-32 aspect-[4/3] bg-zinc-900 rounded-xl overflow-hidden border border-white/10 flex-shrink-0">
-                                                                <img src={v} alt="" className="w-full h-full object-cover" />
-                                                            </div>
-                                                        ))}
-                                                    </>
-                                                ) : (
-                                                    <div className="w-32 aspect-[4/3] rounded-xl border border-dashed border-white/10 flex items-center justify-center bg-white/5 flex-shrink-0">
-                                                        <span className="text-[8px] uppercase tracking-widest text-slate-600 font-black">Sin fotos</span>
-                                                    </div>
-                                                )}
-                                            </div>
-                                        )}
+                                            ))}
+                                        </HorizontalScroll>
 
                                         <motion.button
                                             whileHover={{ scale: 1.02 }}
@@ -492,7 +533,7 @@ const Recognitions = () => {
 
                                 <div className="p-8 max-h-[75vh] overflow-y-auto space-y-8 custom-scrollbar bg-gradient-to-b from-[#00030a] to-[#050810]">
                                     {hackathons.map((item, idx) => (
-                                        <HackathonSummaryCard key={`modal-hack-${idx}`} item={item} />
+                                        <HackathonSummaryCard key={`modal-hack-${idx}`} item={item} onImageClick={(url) => setSelectedImage(url)} />
                                     ))}
                                 </div>
 
@@ -501,6 +542,50 @@ const Recognitions = () => {
                                         Compitiendo en la vanguardia del ecosistema tecnológico
                                     </p>
                                 </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Image Lightbox Modal */}
+                <AnimatePresence>
+                    {selectedImage && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+                            onClick={() => setSelectedImage(null)}
+                        >
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="absolute inset-0 bg-black/95 backdrop-blur-3xl"
+                            />
+
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0.9, opacity: 0 }}
+                                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                                className="relative max-w-7xl w-full h-full flex items-center justify-center"
+                            >
+                                <img
+                                    src={selectedImage}
+                                    alt="Zoom"
+                                    className="max-w-full max-h-full object-contain rounded-xl shadow-2xl selection:bg-transparent"
+                                />
+
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setSelectedImage(null);
+                                    }}
+                                    className="absolute top-0 right-0 p-4 text-white/50 hover:text-white transition-colors"
+                                >
+                                    <X className="w-8 h-8" />
+                                </button>
                             </motion.div>
                         </motion.div>
                     )}

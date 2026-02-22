@@ -89,7 +89,7 @@ const About = () => {
 
     const stats = [
         { label: "Aumento en Eficiencia", value: "10x", icon: <Zap className="w-5 h-5 text-blue-500" />, color: "text-blue-500" },
-        { label: "Usuarios Activos", value: "+250k", icon: <Database className="w-5 h-5 text-green-500" />, color: "text-green-500" },
+        { label: "Usuarios Activos", value: "+5k", icon: <Database className="w-5 h-5 text-green-500" />, color: "text-green-500" },
         { label: "Uptime en Sistemas", value: "99.9%", icon: <ShieldCheck className="w-5 h-5 text-purple-500" />, color: "text-purple-500" },
         { label: "Procesos Digitalizados", value: "100%", icon: <Cpu className="w-5 h-5 text-amber-500" />, color: "text-amber-500" },
     ];
