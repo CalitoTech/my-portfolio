@@ -6,11 +6,13 @@ import Recognitions from "./components/sections/Recognitions";
 import Services from "./components/sections/Services";
 import Contact from "./components/sections/Contact";
 import ContactDock from "./components/ContactDock";
+import LanguageSwitcher from "./components/LanguageSwitcher";
 import ParticlesBackground from "./components/backgrounds/ParticlesBackground";
 
 function App() {
   return (
     <main className="relative w-full bg-[#00030a] overflow-x-hidden md:h-screen md:overflow-y-auto md:snap-y md:snap-mandatory md:scroll-smooth">
+      <LanguageSwitcher />
       <ParticlesBackground />
 
       <section id="home" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center justify-center md:snap-start z-10 pt-20 md:py-16">
