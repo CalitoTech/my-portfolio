@@ -33,7 +33,7 @@ const Contact = () => {
 
                 <BlurFade delay={0.2} inView>
                     <div className="flex flex-col md:flex-row items-center gap-6">
-                        <a href="https://wa.me/584263519830" target="_blank" rel="noopener noreferrer" className="group/wa">
+                        <a href="https://wa.me/584146411020" target="_blank" rel="noopener noreferrer" className="group/wa">
                             <InteractiveHoverButton
                                 className="px-12 py-8 text-xl font-black uppercase tracking-widest bg-white text-black border-black/20"
                                 style={{
