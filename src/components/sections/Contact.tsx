@@ -1,100 +1,114 @@
+import { useState } from "react";
 import { BlurFade } from "@/components/ui/blur-fade";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import { RetroGrid } from "@/components/ui/retro-grid";
-import { motion } from "motion/react";
 import { useTranslation, Trans } from "react-i18next";
-import {
-    Mail,
-    Linkedin,
-    Github
-} from "lucide-react";
+import { ArrowUp, ArrowUpRight, Check, Copy, Github, Linkedin, MessageCircle } from "lucide-react";
 
-/**
- * Clean & High-Impact Contact Section
- * Final destination of the portfolio scroll.
- */
+const EMAIL = "carlosdanielnavas26@gmail.com";
+
 const Contact = () => {
-    const { t } = useTranslation();
+  const { t } = useTranslation();
+  const [copied, setCopied] = useState(false);
 
-    return (
-        <section id="contact-content" className="relative w-full min-h-screen flex flex-col items-center justify-between overflow-hidden bg-[#00030a] px-6 py-20">
-            {/* Background Grid */}
-            <RetroGrid className="opacity-15" />
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      window.location.href = `mailto:${EMAIL}`;
+    }
+  };
 
-            {/* Main CTA */}
-            <div className="relative z-20 flex-1 flex flex-col items-center justify-center text-center w-full max-w-4xl">
-                <BlurFade delay={0.1} inView>
-                    <h3 className="text-5xl md:text-9xl font-black tracking-tighter text-white mb-12 leading-[0.8] uppercase">
-                        <Trans i18nKey="contact.cta">
-                            ¿Listo para <span className="text-blue-500 underline decoration-blue-500/20 underline-offset-8">escalar?</span>
-                        </Trans>
-                    </h3>
-                </BlurFade>
+  const socials = [
+    { label: "GitHub", href: "https://github.com/CalitoTech", Icon: Github },
+    { label: "LinkedIn", href: "https://linkedin.com/in/carlos-navas04", Icon: Linkedin },
+  ];
 
-                <BlurFade delay={0.2} inView>
-                    <div className="flex flex-col md:flex-row items-center gap-6">
-                        <a href="https://wa.me/584146411020" target="_blank" rel="noopener noreferrer" className="group/wa">
-                            <InteractiveHoverButton
-                                className="px-12 py-8 text-xl font-black uppercase tracking-widest bg-white text-black border-black/20"
-                                style={{
-                                    // @ts-ignore
-                                    '--primary': '#000000',
-                                    '--primary-foreground': '#ffffff'
-                                } as React.CSSProperties}
-                            >
-                                {t("contact.whatsapp")}
-                            </InteractiveHoverButton>
-                        </a>
+  const links = ["experience", "about", "recognitions", "services"] as const;
 
-                        <div className="flex items-center gap-4">
-                            <motion.a
-                                whileHover={{ y: -5, scale: 1.1 }}
-                                href="mailto:carlosdanielnavas26@gmail.com"
-                                className="p-5 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
-                            >
-                                <Mail className="w-7 h-7" />
-                            </motion.a>
-                            <motion.a
-                                whileHover={{ y: -5, scale: 1.1 }}
-                                href="https://github.com/CalitoTech"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-5 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
-                            >
-                                <Github className="w-7 h-7" />
-                            </motion.a>
-                            <motion.a
-                                whileHover={{ y: -5, scale: 1.1 }}
-                                href="https://linkedin.com/in/carlos-navas04"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="p-5 rounded-2xl bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition-all shadow-xl backdrop-blur-md"
-                            >
-                                <Linkedin className="w-7 h-7" />
-                            </motion.a>
-                        </div>
-                    </div>
-                </BlurFade>
+  return (
+    <div className="mx-auto flex w-full max-w-6xl flex-col justify-between pt-28 pb-10">
+      <div className="my-auto">
+        <BlurFade inView delay={0.05}>
+          <div className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.18em] text-ink-mute">
+            <span className="text-brand">05</span>
+            <span className="h-px w-8 bg-line-strong" aria-hidden="true" />
+            <span>{t("contact.eyebrow")}</span>
+          </div>
+        </BlurFade>
+
+        <BlurFade inView delay={0.1}>
+          <h2 className="mt-6 font-display text-6xl leading-[0.95] tracking-tight text-ink sm:text-7xl md:text-[8.5rem]">
+            <Trans i18nKey="contact.cta" components={{ 1: <em className="italic text-brand" /> }} />
+          </h2>
+        </BlurFade>
+
+        <BlurFade inView delay={0.15}>
+          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">{t("contact.lead")}</p>
+        </BlurFade>
+
+        <BlurFade inView delay={0.2}>
+          <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center">
+            <a
+              href="https://wa.me/584146411020"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex h-14 items-center justify-center gap-2.5 rounded-full bg-brand px-8 text-base font-semibold text-brand-ink transition-transform hover:-translate-y-0.5"
+            >
+              <MessageCircle className="size-5" />
+              {t("contact.whatsapp")}
+              <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+            </a>
+
+            <div className="flex h-14 items-center gap-1 rounded-full border border-line-strong bg-canvas/60 pr-1.5 pl-5">
+              <a href={`mailto:${EMAIL}`} className="truncate text-sm font-medium text-ink hover:text-brand md:text-base">
+                <span className="sr-only">{t("contact.email_label")}: </span>
+                {EMAIL}
+              </a>
+              <button
+                type="button"
+                onClick={copyEmail}
+                aria-label={copied ? t("contact.copied") : t("contact.copy")}
+                className="ml-2 flex size-11 shrink-0 items-center justify-center rounded-full text-ink-soft transition-colors hover:bg-raised hover:text-ink cursor-pointer"
+              >
+                {copied ? <Check className="size-4 text-brand" /> : <Copy className="size-4" />}
+              </button>
+              <span className="sr-only" aria-live="polite">{copied ? t("contact.copied") : ""}</span>
             </div>
 
-            {/* Footer - Strictly at the bottom */}
-            <div className="relative z-20 w-full mt-auto pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-slate-600 max-w-6xl mx-auto">
-                <p className="text-xs font-bold uppercase tracking-[0.3em] text-center md:text-left">
-                    © {new Date().getFullYear()} {t("contact.footer.title")}
-                </p>
-                <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-8 gap-y-4 text-xs font-bold uppercase tracking-widest transition-colors duration-300">
-                    <a href="#home" className="hover:text-blue-400 transition-colors">{t("contact.nav.home")}</a>
-                    <a href="#experience" className="hover:text-purple-400 transition-colors">{t("contact.nav.experience")}</a>
-                    <a href="#about" className="hover:text-emerald-400 transition-colors">{t("contact.nav.about")}</a>
-                    <a href="#recognitions" className="hover:text-amber-400 transition-colors">{t("contact.nav.recognitions")}</a>
-                    <a href="#services" className="hover:text-cyan-400 transition-colors">{t("contact.nav.services")}</a>
-                </div>
+            <div className="flex gap-2">
+              {socials.map(({ label, href, Icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="flex size-14 items-center justify-center rounded-full border border-line-strong text-ink-soft transition-colors hover:border-ink hover:text-ink"
+                >
+                  <Icon className="size-5" />
+                </a>
+              ))}
             </div>
+          </div>
+        </BlurFade>
+      </div>
 
-            {/* Shine Edge Effect Top */}
-            <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-        </section>
-    );
+      <footer className="mt-20 flex flex-col gap-6 border-t border-line pt-8 text-sm text-ink-mute md:flex-row md:items-center md:justify-between">
+        <p>© {new Date().getFullYear()} {t("contact.footer.title")}</p>
+        <nav aria-label={t("nav.menu")} className="flex flex-wrap gap-x-6 gap-y-3">
+          {links.map((id) => (
+            <a key={id} href={`#${id}`} className="transition-colors hover:text-ink">
+              {t(`contact.nav.${id}`)}
+            </a>
+          ))}
+          <a href="#home" className="inline-flex items-center gap-1 text-ink-soft transition-colors hover:text-ink">
+            {t("contact.back_top")} <ArrowUp className="size-3.5" />
+          </a>
+        </nav>
+      </footer>
+    </div>
+  );
 };
 
 export default Contact;

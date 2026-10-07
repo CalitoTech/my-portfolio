@@ -2,7 +2,42 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-/* Custom Scrollbar Styling */
+/* ---------- Design tokens: "engineering dossier" ---------- */
+@theme {
+  --color-canvas: #0b0c0a;
+  --color-surface: #121410;
+  --color-raised: #191b16;
+  --color-line: #262921;
+  --color-line-strong: #383c31;
+  --color-ink: #ecede6;
+  --color-ink-soft: #b5b8ab;
+  --color-ink-mute: #8b8e81;
+  --color-brand: #c8f051;
+  --color-brand-ink: #10120c;
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+html {
+  background: var(--color-canvas);
+}
+
+body {
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-brand);
+  color: var(--color-brand-ink);
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -13,26 +48,57 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-line-strong);
   border-radius: 20px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.5);
-  /* Blue-500 with opacity */
-  background-clip: content-box;
-}
-
-/* For Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.05) transparent;
+  scrollbar-color: var(--color-line-strong) transparent;
 }
 
-body {
-  overflow-x: hidden;
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Field furrows: thin parallel rows that fade toward the edges */
+.furrows {
+  background-image: repeating-linear-gradient(-12deg,
+      transparent 0 46px,
+      rgb(236 237 230 / 0.035) 46px 47px);
+  mask-image: radial-gradient(ellipse 80% 70% at 70% 30%, #000 0%, transparent 75%);
+}
+
+.grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+  opacity: 0.06;
+  mix-blend-mode: overlay;
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 @custom-variant dark (&:is(.dark *));

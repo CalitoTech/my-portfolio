@@ -6,7 +6,12 @@
         "recognitions": "Reconocimientos",
         "services": "Servicios",
         "menu": "Menú",
-        "contact": "Contacto"
+        "contact": "Contacto",
+        "cta": "Hablemos",
+        "open_menu": "Abrir menú",
+        "close_menu": "Cerrar menú",
+        "language": "Cambiar a inglés",
+        "skip": "Saltar al contenido"
     },
     "hero": {
         "badge": "Cofundador & Líder de Backend",
@@ -14,7 +19,18 @@
         "crediagro_role": "Cofundador",
         "agroo_role": "Backend Lead",
         "description": "Arquitecto de sistemas escalables y <1>líder técnico</1>. Transformando el sector agrícola con código de alto rendimiento.",
-        "scroll": "Desliza hacia abajo"
+        "scroll": "Desliza hacia abajo",
+        "eyebrow": "Disponible para nuevos proyectos",
+        "location": "Venezuela · UTC−4",
+        "headline": "Construyo la infraestructura que <1>financia el agro</1>.",
+        "cta_primary": "Ver trayectoria",
+        "cta_secondary": "Contactar",
+        "metrics": {
+            "users": "usuarios registrados en Crediagro",
+            "credit": "en líneas de financiamiento aprobadas",
+            "sales": "en ventas procesadas",
+            "hackathon": "Hackathon AlegrIA, entre 1.500+ aspirantes"
+        }
     },
     "about": {
         "badge": "Sobre Mí",
@@ -32,7 +48,9 @@
             "backend": "Backend & DB",
             "learning": "Aprendiendo",
             "tools": "Herramientas"
-        }
+        },
+        "photo_alt": "Retrato de Carlos Navas",
+        "stack_title": "Herramientas con las que construyo"
     },
     "services": {
         "badge": "Estrategia & Soluciones",
@@ -64,7 +82,8 @@
                 "description": "Soporte dinámico y actualizaciones constantes para un funcionamiento impecable.",
                 "cta": "Saber más"
             }
-        }
+        },
+        "title": "Cómo puedo <1>ayudarte</1>"
     },
     "experience": {
         "badge": "Trayectoria Profesional",
@@ -142,7 +161,9 @@
                     }
                 }
             }
-        }
+        },
+        "open_case": "Ver detalle",
+        "heading": "Trayectoria"
     },
     "projects": {
         "title": "Sistemas Destacados",
@@ -220,7 +241,12 @@
                     "badge": "2DO LUGAR BACKEND"
                 }
             }
-        }
+        },
+        "badge": "Reconocimientos",
+        "title": "Respaldo <1>verificable</1>",
+        "view_certificate": "Ver certificado",
+        "gallery": "Galería del evento",
+        "photos": "Fotos"
     },
     "contact": {
         "cta": "¿Listo para <1>escalar?</1>",
@@ -236,6 +262,18 @@
         },
         "footer": {
             "title": "Carlos Navas · Arquitecto & Fundador"
-        }
+        },
+        "eyebrow": "Contacto",
+        "lead": "Cuéntame qué necesitas construir, escalar o automatizar.",
+        "email_label": "Escríbeme",
+        "copy": "Copiar correo",
+        "copied": "Copiado",
+        "back_top": "Volver arriba"
+    },
+    "common": {
+        "close": "Cerrar",
+        "previous": "Anterior",
+        "next": "Siguiente",
+        "enlarge": "Ampliar imagen"
     }
 }

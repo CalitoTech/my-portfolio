@@ -6,7 +6,12 @@
         "recognitions": "Recognitions",
         "services": "Services",
         "menu": "Menu",
-        "contact": "Contact"
+        "contact": "Contact",
+        "cta": "Let's talk",
+        "open_menu": "Open menu",
+        "close_menu": "Close menu",
+        "language": "Switch to Spanish",
+        "skip": "Skip to content"
     },
     "hero": {
         "badge": "Cofounder & Backend Lead",
@@ -14,7 +19,18 @@
         "crediagro_role": "Cofounder",
         "agroo_role": "Backend Lead",
         "description": "Scalable systems architect and <1>technical leader</1>. Transforming the agricultural sector with high-performance code.",
-        "scroll": "Scroll down"
+        "scroll": "Scroll down",
+        "eyebrow": "Open to new projects",
+        "location": "Venezuela · UTC−4",
+        "headline": "I build the infrastructure that <1>finances agriculture</1>.",
+        "cta_primary": "View my work",
+        "cta_secondary": "Get in touch",
+        "metrics": {
+            "users": "registered users on Crediagro",
+            "credit": "in approved credit lines",
+            "sales": "in processed sales",
+            "hackathon": "AlegrIA Hackathon, among 1,500+ applicants"
+        }
     },
     "about": {
         "badge": "About Me",
@@ -32,7 +48,9 @@
             "backend": "Backend & DB",
             "learning": "Learning",
             "tools": "Tools"
-        }
+        },
+        "photo_alt": "Portrait of Carlos Navas",
+        "stack_title": "Tools I build with"
     },
     "services": {
         "badge": "Strategy & Solutions",
@@ -64,7 +82,8 @@
                 "description": "Dynamic support and constant updates for flawless performance.",
                 "cta": "Learn more"
             }
-        }
+        },
+        "title": "How I can <1>help</1>"
     },
     "experience": {
         "badge": "Professional Trajectory",
@@ -142,7 +161,9 @@
                     }
                 }
             }
-        }
+        },
+        "open_case": "View details",
+        "heading": "Track record"
     },
     "projects": {
         "title": "Featured Systems",
@@ -220,7 +241,12 @@
                     "badge": "2ND PLACE BACKEND"
                 }
             }
-        }
+        },
+        "badge": "Recognition",
+        "title": "Verifiable <1>track record</1>",
+        "view_certificate": "View certificate",
+        "gallery": "Event gallery",
+        "photos": "Photos"
     },
     "contact": {
         "cta": "Ready to <1>scale?</1>",
@@ -236,6 +262,18 @@
         },
         "footer": {
             "title": "Carlos Navas · Architect & Founder"
-        }
+        },
+        "eyebrow": "Contact",
+        "lead": "Tell me what you need to build, scale or automate.",
+        "email_label": "Email me",
+        "copy": "Copy email",
+        "copied": "Copied",
+        "back_top": "Back to top"
+    },
+    "common": {
+        "close": "Close",
+        "previous": "Previous",
+        "next": "Next",
+        "enlarge": "Enlarge image"
     }
 }

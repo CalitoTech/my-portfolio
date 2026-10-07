@@ -1,46 +1,48 @@
 import './App.css'
+import { MotionConfig } from "motion/react";
 import Hero from "./components/sections/Hero";
 import Experience from "./components/sections/Experience";
 import About from "./components/sections/About";
 import Recognitions from "./components/sections/Recognitions";
 import Services from "./components/sections/Services";
 import Contact from "./components/sections/Contact";
-import ContactDock from "./components/ContactDock";
-import LanguageSwitcher from "./components/LanguageSwitcher";
-import ParticlesBackground from "./components/backgrounds/ParticlesBackground";
+import Header from "./components/Header";
+import Backdrop from "./components/backgrounds/Backdrop";
+
+const section = "relative z-10 flex min-h-dvh w-full items-center-safe justify-center px-5 pt-24 pb-20 md:px-8 md:snap-start";
 
 function App() {
   return (
-    <main className="relative w-full bg-[#00030a] overflow-x-hidden md:h-screen md:overflow-y-auto md:snap-y md:snap-mandatory md:scroll-smooth">
-      <LanguageSwitcher />
-      <ParticlesBackground />
+    <MotionConfig reducedMotion="user">
+      <Header />
+      <main className="relative w-full overflow-x-hidden md:h-dvh md:overflow-y-auto md:snap-y md:snap-mandatory md:scroll-smooth">
+        <Backdrop />
 
-      <section id="home" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center justify-center md:snap-start z-10 pt-20 md:py-16">
-        <Hero />
-      </section>
+        <section id="home" className={section}>
+          <Hero />
+        </section>
 
-      <section id="experience" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-2 pb-12 md:py-12">
-        <Experience />
-      </section>
+        <section id="experience" className={section}>
+          <Experience />
+        </section>
 
-      <section id="about" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-10 pb-8 md:py-12">
-        <About />
-      </section>
+        <section id="about" className={section}>
+          <About />
+        </section>
 
-      <section id="recognitions" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-2 pb-4 px-6 md:py-12">
-        <Recognitions />
-      </section>
+        <section id="recognitions" className={section}>
+          <Recognitions />
+        </section>
 
-      <section id="services" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-0 pb-32 px-6 md:pt-12 md:pb-32">
-        <Services />
-      </section>
+        <section id="services" className={section}>
+          <Services />
+        </section>
 
-      <section id="contact" className="relative min-h-screen md:h-screen w-full flex items-center justify-center md:snap-start z-10">
-        <Contact />
-      </section>
-
-      <ContactDock />
-    </main>
+        <section id="contact" className="relative z-10 flex min-h-dvh w-full px-5 md:px-8 md:snap-start">
+          <Contact />
+        </section>
+      </main>
+    </MotionConfig>
   )
 }
 

@@ -1,28 +1,9 @@
+import { useRef, useState } from "react";
 import { BlurFade } from "@/components/ui/blur-fade";
-import { Badge } from "@/components/ui/badge";
-import { AnimatedList } from "@/components/ui/animated-list";
-import { motion, AnimatePresence } from "motion/react";
-import { useTranslation } from "react-i18next";
-import {
-    Trophy,
-    Award,
-    Medal,
-    Zap,
-    ExternalLink,
-    Plus,
-    X,
-    ChevronLeft,
-    ChevronRight,
-} from "lucide-react";
-import { cn } from "@/lib/utils";
-import { useState, useEffect, useRef } from "react";
-import { HeroVideoDialog } from "@/components/ui/hero-video-dialog";
-import { Maximize2 } from "lucide-react";
-
-/**
- * Recognitions & Hackathons Section
- * Combines dynamic certification lists with detailed hackathon storytelling.
- */
+import { Dialog } from "@/components/Dialog";
+import SectionHeading from "@/components/SectionHeading";
+import { useTranslation, Trans } from "react-i18next";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Images, Play } from "lucide-react";
 
 import imgClaude from "@/assets/certificates/certificate-claude-code.png";
 import pdfClaude from "@/assets/documents/certificate-claude-code.pdf";
@@ -33,7 +14,6 @@ import pdfCorpoEureka from "@/assets/documents/certificate-corpoeureka.pdf";
 import imgTSU from "@/assets/certificates/certificate-technical-degree.jpg";
 import pdfTSU from "@/assets/documents/certificate-technical-degree.pdf";
 
-// AlegrIA 2025 Assets
 import alegVideo from "@/assets/hackathons/alegria-2025/video1.mp4";
 import alegImg1 from "@/assets/hackathons/alegria-2025/image1.jpeg";
 import alegImg2 from "@/assets/hackathons/alegria-2025/image2.jpeg";
@@ -42,563 +22,205 @@ import alegImg4 from "@/assets/hackathons/alegria-2025/image4.jpeg";
 import alegImg5 from "@/assets/hackathons/alegria-2025/image5.jpeg";
 import alegImg6 from "@/assets/hackathons/alegria-2025/image6.png";
 
-// CorpoEureka 2025 Assets
 import corpoImg1 from "@/assets/hackathons/corpoeureka-2025/image1.png";
 import corpoImg2 from "@/assets/hackathons/corpoeureka-2025/image2.png";
 import corpoImg3 from "@/assets/hackathons/corpoeureka-2025/image3.jpg";
 
-interface RecognitionItem {
-    name: string;
-    description: string;
-    image?: string;
-    fileUrl?: string;
-    icon: React.ReactNode;
-    color: string;
+interface Certification {
+  name: string;
+  description: string;
+  origin: string;
+  image: string;
+  fileUrl: string;
+  photos?: string[];
 }
 
-interface HackathonItem {
-    name: string;
-    description: string;
-    badgeValue: string;
-    badgeColor: string;
-    icon: React.ReactNode;
-    fileUrl?: string;
-    isFeatured?: boolean;
-    stats?: string;
-    visuals?: string[];
-    image?: string;
-    video?: string;
-}
+const corpoPhotos = [corpoImg1, corpoImg2, corpoImg3];
 
+/** Horizontal, snap-scrolling strip of thumbnails with prev/next buttons. */
+const Gallery = ({ images, label, onOpen }: { images: string[]; label: string; onOpen: (src: string) => void }) => {
+  const { t } = useTranslation();
+  const ref = useRef<HTMLDivElement>(null);
+  const scroll = (dir: 1 | -1) =>
+    ref.current?.scrollBy({ left: dir * ref.current.clientWidth * 0.8, behavior: "smooth" });
 
-const CertificationCard = ({ item, isCompact = false }: { item: RecognitionItem; isCompact?: boolean }) => {
-    return (
-        <div
-            className={cn(
-                "group/cert relative flex items-center gap-4 p-4 rounded-2xl border border-white/5 bg-white/5 hover:bg-white/10 transition-all cursor-default",
-                isCompact ? "p-3" : "p-4"
-            )}
-            onClick={() => item.fileUrl && window.open(item.fileUrl, '_blank')}
-        >
-            <div className="flex items-start gap-4 flex-1 min-w-0">
-                <div className={cn("p-3 rounded-xl bg-gradient-to-br border border-white/10 flex-shrink-0", item.color)}>
-                    {item.image ? (
-                        <img src={item.image} alt={item.name} className="w-5 h-5 md:w-6 md:h-6 object-contain" />
-                    ) : (
-                        <Award className="w-5 h-5 md:w-6 md:h-6 text-white/80" />
-                    )}
-                </div>
-                <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-                    <div className="flex flex-col md:flex-row md:items-center gap-1.5 md:gap-3">
-                        <span className="text-xs md:text-sm font-black text-white uppercase tracking-tight break-words leading-tight">{item.name}</span>
-                        <div className="flex flex-wrap gap-2">
-                            {item.icon}
-                        </div>
-                    </div>
-                    {!isCompact && (
-                        <p className="text-[10px] md:text-xs text-slate-400 mt-1 font-light leading-snug">
-                            {item.description}
-                        </p>
-                    )}
-                </div>
-            </div>
-            {item.fileUrl && (
-                <div className="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover/cert:opacity-100 transition-opacity">
-                    <ExternalLink className="w-4 h-4 text-slate-500" />
-                </div>
-            )}
-        </div>
-    );
-};
-
-const HorizontalScroll = ({ children }: { children: React.ReactNode }) => {
-    const scrollRef = useRef<HTMLDivElement>(null);
-
-    const scroll = (direction: 'left' | 'right') => {
-        if (scrollRef.current) {
-            const { scrollLeft, clientWidth } = scrollRef.current;
-            const scrollTo = direction === 'left'
-                ? scrollLeft - clientWidth * 0.7
-                : scrollLeft + clientWidth * 0.7;
-            scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
-        }
-    };
-
-    return (
-        <div className="group/scroll relative w-full">
-            {/* Gradient Overlays for depth */}
-            <div className="absolute left-0 top-0 bottom-4 w-12 bg-gradient-to-r from-[#00030a] to-transparent z-10 pointer-events-none opacity-0 group-hover/scroll:opacity-100 transition-opacity" />
-            <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-[#00030a] to-transparent z-10 pointer-events-none opacity-0 group-hover/scroll:opacity-100 transition-opacity" />
-
-            {/* Navigation Buttons (Desktop only) */}
+  return (
+    <div>
+      <div className="mb-3 flex items-center justify-between">
+        <span className="font-mono text-xs uppercase tracking-[0.16em] text-ink-mute">{label}</span>
+        <div className="flex gap-1.5">
+          {([-1, 1] as const).map((dir) => (
             <button
-                onClick={() => scroll('left')}
-                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/60 border border-white/10 text-white opacity-0 group-hover/scroll:opacity-100 hover:bg-black/80 transition-all hidden md:flex items-center justify-center backdrop-blur-md"
+              key={dir}
+              type="button"
+              onClick={() => scroll(dir)}
+              aria-label={dir === -1 ? t("common.previous") : t("common.next")}
+              className="flex size-9 items-center justify-center rounded-full border border-line text-ink-soft transition-colors hover:border-line-strong hover:text-ink cursor-pointer"
             >
-                <ChevronLeft className="w-5 h-5" />
+              {dir === -1 ? <ChevronLeft className="size-4" /> : <ChevronRight className="size-4" />}
             </button>
-            <button
-                onClick={() => scroll('right')}
-                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-black/60 border border-white/10 text-white opacity-0 group-hover/scroll:opacity-100 hover:bg-black/80 transition-all hidden md:flex items-center justify-center backdrop-blur-md"
-            >
-                <ChevronRight className="w-5 h-5" />
-            </button>
-
-
-
-            <div
-                ref={scrollRef}
-                className="flex gap-4 overflow-x-auto pb-4 snap-x snap-mandatory no-scrollbar hover:custom-scrollbar-mini transition-all"
-                style={{
-                    scrollbarWidth: 'thin',
-                    scrollbarColor: 'rgba(255,255,255,0.1) transparent'
-                }}
-            >
-                {children}
-            </div>
+          ))}
         </div>
-    );
-};
-
-const HackathonSummaryCard = ({ item, onImageClick }: { item: HackathonItem; onImageClick: (url: string) => void }) => {
-    return (
-        <div
-            className="group relative rounded-3xl border border-white/10 bg-[#0a0f18]/80 backdrop-blur-md p-6 md:p-8 flex flex-col gap-6 shadow-xl cursor-default"
-        >
-            <div className="flex items-start justify-between">
-                <div className="flex gap-4 items-start">
-                    <div className="p-3 md:p-4 rounded-2xl bg-white/5 border border-white/10 group-hover:scale-105 transition-transform shrink-0">
-                        {item.icon}
-                    </div>
-                    <div className="min-w-0">
-                        <div className="flex flex-col md:flex-row md:items-center gap-2 mb-1">
-                            <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight whitespace-normal break-words leading-tight">{item.name}</h4>
-                            <div className="flex flex-wrap gap-2">
-                                <Badge variant="outline" className={cn("text-[9px] uppercase font-black px-2 shrink-0 py-0.5", item.badgeColor)}>
-                                    {item.badgeValue}
-                                </Badge>
-                            </div>
-                        </div>
-                        {item.stats && <p className="text-[10px] text-blue-400 font-bold uppercase tracking-widest">{item.stats}</p>}
-                    </div>
-                </div>
-            </div>
-
-            <p className="text-sm text-slate-400 font-light leading-relaxed">
-                {item.description}
-            </p>
-
-            <HorizontalScroll>
-                {item.image || (item.visuals && item.visuals.length > 0) ? (
-                    <>
-                        {item.image && (
-                            <div
-                                onClick={() => onImageClick(item.image!)}
-                                className="group/img relative w-64 md:w-80 aspect-video bg-zinc-900 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 cursor-zoom-in snap-center"
-                            >
-                                <img src={item.image} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110" />
-                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
-                                    <Maximize2 className="w-6 h-6 text-white" />
-                                </div>
-                            </div>
-                        )}
-                        {item.visuals?.map((v, i) => (
-                            <div
-                                key={i}
-                                onClick={() => onImageClick(v)}
-                                className="group/img relative w-64 md:w-80 aspect-video bg-zinc-900 rounded-2xl overflow-hidden border border-white/10 flex-shrink-0 cursor-zoom-in snap-center"
-                            >
-                                <img src={v} alt="" className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110" />
-                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
-                                    <Maximize2 className="w-6 h-6 text-white" />
-                                </div>
-                            </div>
-                        ))}
-                    </>
-                ) : (
-                    <div className="w-32 aspect-[4/3] rounded-xl border border-dashed border-white/10 flex items-center justify-center bg-white/5 flex-shrink-0">
-                        <span className="text-[8px] uppercase tracking-widest text-slate-600 font-black">Sin fotos</span>
-                    </div>
-                )}
-            </HorizontalScroll>
-        </div>
-    );
+      </div>
+      <div ref={ref} className="no-scrollbar flex snap-x snap-mandatory gap-2.5 overflow-x-auto">
+        {images.map((src, i) => (
+          <button
+            key={src}
+            type="button"
+            onClick={() => onOpen(src)}
+            aria-label={`${t("common.enlarge")} ${i + 1}`}
+            className="group relative aspect-[4/3] w-28 shrink-0 snap-start overflow-hidden rounded-lg border border-line bg-raised cursor-zoom-in"
+          >
+            <img src={src} alt="" loading="lazy" className="size-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
 };
 
 const Recognitions = () => {
-    const { t } = useTranslation();
-    const [isCertModalOpen, setIsCertModalOpen] = useState(false);
-    const [isHackModalOpen, setIsHackModalOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const { t } = useTranslation();
+  const [zoomed, setZoomed] = useState<string | null>(null);
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [photosOpen, setPhotosOpen] = useState(false);
 
-    const certifications: RecognitionItem[] = [
-        {
-            name: t("recognitions.certs.items.tsu.name"),
-            description: t("recognitions.certs.items.tsu.description"),
-            image: imgTSU,
-            fileUrl: pdfTSU,
-            icon: <Badge className="bg-red-500/20 text-red-400 border-red-500/30 font-black">{t("recognitions.certs.items.tsu.origin")}</Badge>,
-            color: "from-red-500/10",
-        },
-        {
-            name: t("recognitions.certs.items.claude.name"),
-            description: t("recognitions.certs.items.claude.description"),
-            image: imgClaude,
-            fileUrl: pdfClaude,
-            icon: <Badge className="bg-white/10 text-white border-white/20">{t("recognitions.certs.items.claude.origin")}</Badge>,
-            color: "from-white/10",
-        },
-        {
-            name: t("recognitions.certs.items.alegria.name"),
-            description: t("recognitions.certs.items.alegria.description"),
-            image: imgAlegrIA,
-            fileUrl: pdfAlegrIA,
-            icon: <Badge className="bg-blue-600/20 text-blue-400 border-blue-600/30">{t("recognitions.certs.items.alegria.origin")}</Badge>,
-            color: "from-blue-600/10",
-        },
-        {
-            name: t("recognitions.certs.items.corpoeureka.name"),
-            description: t("recognitions.certs.items.corpoeureka.description"),
-            image: imgCorpoEureka,
-            fileUrl: pdfCorpoEureka,
-            icon: <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30">{t("recognitions.certs.items.corpoeureka.origin")}</Badge>,
-            color: "from-purple-500/10",
-        }
-    ];
+  const certifications: Certification[] = (["tsu", "claude", "alegria", "corpoeureka"] as const).map((key) => ({
+    name: t(`recognitions.certs.items.${key}.name`),
+    description: t(`recognitions.certs.items.${key}.description`),
+    origin: t(`recognitions.certs.items.${key}.origin`),
+    ...{
+      tsu: { image: imgTSU, fileUrl: pdfTSU },
+      claude: { image: imgClaude, fileUrl: pdfClaude },
+      alegria: { image: imgAlegrIA, fileUrl: pdfAlegrIA },
+      corpoeureka: { image: imgCorpoEureka, fileUrl: pdfCorpoEureka, photos: corpoPhotos },
+    }[key],
+  }));
 
-    const hackathons: HackathonItem[] = [
-        {
-            name: t("recognitions.hackathons.items.alegria.name"),
-            description: t("recognitions.hackathons.items.alegria.description"),
-            badgeValue: t("recognitions.hackathons.items.alegria.badge"),
-            badgeColor: "bg-blue-500/20 text-blue-500 border-blue-500/30",
-            stats: t("recognitions.hackathons.items.alegria.stats"),
-            icon: <Zap className="w-5 h-5 text-blue-500" />,
-            fileUrl: pdfAlegrIA,
-            isFeatured: true,
-            video: alegVideo,
-            image: alegImg1,
-            visuals: [alegImg2, alegImg3, alegImg4, alegImg5, alegImg6]
-        },
-        {
-            name: t("recognitions.hackathons.items.corpoeureka.name"),
-            description: t("recognitions.hackathons.items.corpoeureka.description"),
-            badgeValue: t("recognitions.hackathons.items.corpoeureka.badge"),
-            badgeColor: "border-purple-500/30 text-purple-400",
-            icon: <Award className="w-8 h-8 text-purple-500" />,
-            fileUrl: pdfCorpoEureka,
-            image: corpoImg1,
-            visuals: [corpoImg2, corpoImg3]
-        }
-    ];
+  return (
+    <div className="w-full max-w-6xl">
+      <SectionHeading
+        index="03"
+        label={t("recognitions.badge")}
+        title={<Trans i18nKey="recognitions.title" components={{ 1: <em /> }} />}
+      />
 
-    const initialCerts = certifications.slice(0, 4);
-    const featuredHackathon = hackathons.find(h => h.isFeatured);
+      <BlurFade inView delay={0.1}>
+        <article className="mt-10 grid overflow-hidden rounded-2xl border border-line bg-surface lg:grid-cols-2">
+          <button
+            type="button"
+            onClick={() => setVideoOpen(true)}
+            className="group relative block aspect-video w-full overflow-hidden bg-raised lg:aspect-auto lg:h-full cursor-pointer"
+            aria-label={`${t("recognitions.hackathons.items.alegria.name")} — video`}
+          >
+            <video
+              src={`${alegVideo}#t=5`}
+              muted
+              playsInline
+              preload="metadata"
+              className="absolute inset-0 size-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+            <span className="absolute inset-0 flex items-center justify-center">
+              <span className="flex size-16 items-center justify-center rounded-full bg-brand text-brand-ink shadow-xl shadow-black/40 transition-transform group-hover:scale-110">
+                <Play className="ml-1 size-6 fill-current" />
+              </span>
+            </span>
+            <span className="absolute top-4 left-4 rounded-full bg-canvas/80 px-3 py-1 font-mono text-xs uppercase tracking-wider text-brand backdrop-blur">
+              {t("recognitions.hackathons.items.alegria.badge")}
+            </span>
+          </button>
 
-    // Scroll Lock effect
-    useEffect(() => {
-        const isModalOpen = isCertModalOpen || isHackModalOpen || !!selectedImage;
-        const mainElement = document.querySelector('main');
-        const sectionElement = document.getElementById('recognitions');
-
-        if (isModalOpen) {
-            document.body.classList.add('no-scroll');
-            if (mainElement) mainElement.classList.add('no-scroll');
-            if (sectionElement) sectionElement.style.zIndex = '100';
-        } else {
-            document.body.classList.remove('no-scroll');
-            if (mainElement) mainElement.classList.remove('no-scroll');
-            if (sectionElement) sectionElement.style.zIndex = '10';
-        }
-
-        return () => {
-            document.body.classList.remove('no-scroll');
-            if (mainElement) mainElement.classList.remove('no-scroll');
-            if (sectionElement) sectionElement.style.zIndex = '10';
-        };
-    }, [isCertModalOpen, isHackModalOpen]);
-
-    return (
-        <div className="w-full pt-0 pb-8 lg:pt-0 lg:pb-6 lg:pl-48 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto px-6">
-                <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-12 lg:gap-20">
-                    {/* Certifications (Left) */}
-                    <div className="flex flex-col gap-6">
-                        <BlurFade delay={0.1} inView>
-                            <div className="flex items-center gap-4 mb-2">
-                                <Medal className="w-6 h-6 text-blue-500" />
-                                <h3 className="text-3xl font-black text-white uppercase tracking-tighter">{t("recognitions.certs.title")}</h3>
-                            </div>
-                            <p className="text-slate-400 font-light mb-1 max-w-2xl text-xs md:text-sm">
-                                {t("recognitions.certs.description")}
-                            </p>
-                        </BlurFade>
-
-                        <div className="flex flex-col gap-4">
-                            <div className="relative min-h-[350px]">
-                                <AnimatedList delay={1500}>
-                                    {initialCerts.map((item, idx) => (
-                                        <CertificationCard key={`cert-${idx}`} item={item} />
-                                    ))}
-                                </AnimatedList>
-                                <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#00030a] to-transparent z-10 pointer-events-none" />
-                            </div>
-
-                            {certifications.length > 4 && (
-                                <motion.button
-                                    whileHover={{ scale: 1.02 }}
-                                    whileTap={{ scale: 0.98 }}
-                                    onClick={() => setIsCertModalOpen(true)}
-                                    className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-blue-500/10 border border-blue-500/20 text-blue-400 hover:bg-blue-500/20 transition-all font-black uppercase text-[10px] tracking-[0.2em]"
-                                >
-                                    <Plus className="w-4 h-4" />
-                                    {t("recognitions.certs.button_all")}
-                                </motion.button>
-                            )}
-                        </div>
-                    </div>
-
-                    {/* Hackathons (Right) */}
-                    <div className="flex flex-col gap-6">
-                        <BlurFade delay={0.2} inView>
-                            <div className="flex items-center gap-4 mb-2">
-                                <Trophy className="w-6 h-6 text-amber-500" />
-                                <h3 className="text-3xl font-black text-white uppercase tracking-tighter">{t("recognitions.hackathons.title")}</h3>
-                            </div>
-                            <p className="text-slate-400 font-light mb-1 max-w-2xl text-xs md:text-sm">
-                                {t("recognitions.hackathons.description")}
-                            </p>
-                        </BlurFade>
-
-                        <BlurFade delay={0.3} inView>
-                            <div className="space-y-6">
-                                {featuredHackathon && (
-                                    <div
-                                        className="group relative rounded-3xl overflow-hidden border border-white/10 bg-zinc-950 pt-8 px-8 pb-4 transition-all shadow-2xl cursor-default w-full"
-                                    >
-                                        <div className="flex items-start justify-between mb-4">
-                                            <div className="space-y-1">
-                                                <div className="flex flex-col md:flex-row md:items-center gap-3">
-                                                    <h4 className="text-xl md:text-2xl font-black text-white uppercase tracking-tight whitespace-normal break-words">{featuredHackathon.name}</h4>
-                                                    <div className="flex items-center gap-2">
-                                                        <Badge className={cn("uppercase tracking-[0.2em] font-black text-[8px] shrink-0", featuredHackathon.badgeColor)}>
-                                                            {featuredHackathon.badgeValue}
-                                                        </Badge>
-                                                        <Zap className="w-4 h-4 text-emerald-500 animate-pulse shrink-0" />
-                                                    </div>
-                                                </div>
-                                                <p className="text-xs text-blue-400 font-black tracking-widest uppercase">{featuredHackathon.stats}</p>
-                                            </div>
-                                        </div>
-
-                                        <p className="text-sm text-slate-400 font-light leading-relaxed mb-6">
-                                            {featuredHackathon.description}
-                                        </p>
-
-                                        <HorizontalScroll>
-                                            {featuredHackathon.video && (
-                                                <div className="w-[85%] md:w-[70%] flex-shrink-0 snap-center">
-                                                    <HeroVideoDialog
-                                                        className="w-full"
-                                                        animationStyle="from-center"
-                                                        videoSrc={featuredHackathon.video}
-                                                        thumbnailAlt={featuredHackathon.name}
-                                                    />
-                                                </div>
-                                            )}
-                                            {featuredHackathon.visuals && featuredHackathon.visuals.length > 0 && featuredHackathon.visuals.map((v, i) => (
-                                                <div
-                                                    key={i}
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        setSelectedImage(v);
-                                                    }}
-                                                    className="group/img relative w-[85%] md:w-[70%] aspect-video rounded-xl overflow-hidden border border-white/10 cursor-zoom-in hover:border-amber-500/50 transition-all shrink-0 snap-center"
-                                                >
-                                                    <img
-                                                        src={v}
-                                                        alt=""
-                                                        className="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-110"
-                                                    />
-                                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
-                                                        <Maximize2 className="w-8 h-8 text-white" />
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </HorizontalScroll>
-
-                                        <motion.button
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                setIsHackModalOpen(true);
-                                            }}
-                                            className="mt-8 flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-amber-500/5 border border-amber-500/10 text-amber-500/60 hover:text-amber-500 hover:bg-amber-500/10 transition-all font-bold uppercase text-[9px] tracking-[0.2em] cursor-pointer"
-                                        >
-                                            <Trophy className="w-3 h-3" />
-                                            {t("recognitions.hackathons.button_history")}
-                                        </motion.button>
-                                    </div>
-                                )}
-                            </div>
-                        </BlurFade>
-                    </div>
-                </div>
-
-                {/* Certifications Modal */}
-                <AnimatePresence>
-                    {isCertModalOpen && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[100] flex items-center justify-center p-6"
-                        >
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-black/80 backdrop-blur-xl"
-                                onClick={() => setIsCertModalOpen(false)}
-                            />
-                            <motion.div
-                                initial={{ scale: 0.9, y: 20 }}
-                                animate={{ scale: 1, y: 0 }}
-                                exit={{ scale: 0.9, y: 20 }}
-                                className="bg-[#00030a] border border-white/10 w-full max-w-2xl rounded-3xl overflow-hidden shadow-2xl z-[110]"
-                            >
-                                <div className="flex items-center justify-between p-6 border-b border-white/5 bg-white/5">
-                                    <div className="flex items-center gap-3 flex-1 min-w-0">
-                                        <Medal className="w-5 h-5 text-blue-500 shrink-0" />
-                                        <h4 className="text-lg md:text-xl font-black text-white uppercase tracking-tight break-words">{t("recognitions.certs.modal_title")}</h4>
-                                    </div>
-                                    <button
-                                        onClick={() => setIsCertModalOpen(false)}
-                                        className="p-2 rounded-full hover:bg-white/10 text-slate-400 transition-colors shrink-0"
-                                    >
-                                        <X className="w-5 h-5" />
-                                    </button>
-                                </div>
-
-                                <div className="p-6 max-h-[70vh] overflow-y-auto space-y-4 custom-scrollbar">
-                                    {certifications.map((item, idx) => (
-                                        <CertificationCard key={`modal-cert-${idx}`} item={item} />
-                                    ))}
-                                </div>
-
-                                <div className="p-6 border-t border-white/5 bg-white/5 text-center">
-                                    <p className="text-[8px] uppercase tracking-[0.3em] text-slate-500 font-bold">
-                                        {t("recognitions.certs.footer")}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                {/* Hackathons Modal */}
-                <AnimatePresence>
-                    {isHackModalOpen && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[100] flex items-center justify-center p-6"
-                        >
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-black/90 backdrop-blur-2xl"
-                                onClick={() => setIsHackModalOpen(false)}
-                            />
-                            <motion.div
-                                initial={{ scale: 0.9, y: 20 }}
-                                animate={{ scale: 1, y: 0 }}
-                                exit={{ scale: 0.9, y: 20 }}
-                                className="bg-[#00030a] border border-white/10 w-full max-w-4xl rounded-[40px] overflow-hidden shadow-2xl z-[110]"
-                            >
-                                <div className="flex items-center justify-between p-8 border-b border-white/5 bg-white/5">
-                                    <div className="flex items-center gap-4 flex-1 min-w-0">
-                                        <div className="p-2 md:p-3 rounded-2xl bg-amber-500/20 border border-amber-500/30 shrink-0">
-                                            <Trophy className="w-5 h-5 md:w-6 md:h-6 text-amber-500" />
-                                        </div>
-                                        <div className="min-w-0">
-                                            <h4 className="text-lg md:text-2xl font-black text-white uppercase tracking-tighter break-words leading-tight">{t("recognitions.hackathons.modal_title")}</h4>
-                                            <p className="text-[8px] md:text-[9px] text-slate-500 font-black uppercase tracking-[0.2em] md:tracking-[0.3em] mt-1 whitespace-normal">{t("recognitions.hackathons.modal_subtitle")}</p>
-                                        </div>
-                                    </div>
-                                    <button
-                                        onClick={() => setIsHackModalOpen(false)}
-                                        className="p-2 md:p-3 rounded-full hover:bg-white/10 text-slate-400 transition-colors cursor-pointer shrink-0"
-                                    >
-                                        <X className="w-5 h-5 md:w-6 md:h-6" />
-                                    </button>
-                                </div>
-
-                                <div className="p-8 max-h-[75vh] overflow-y-auto space-y-8 custom-scrollbar bg-gradient-to-b from-[#00030a] to-[#050810]">
-                                    {hackathons.map((item, idx) => (
-                                        <HackathonSummaryCard key={`modal-hack-${idx}`} item={item} onImageClick={(url) => setSelectedImage(url)} />
-                                    ))}
-                                </div>
-
-                                <div className="p-6 border-t border-white/5 bg-white/5 text-center">
-                                    <p className="text-[9px] uppercase tracking-[0.4em] text-slate-500 font-bold">
-                                        {t("recognitions.hackathons.footer")}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-
-                {/* Image Lightbox Modal */}
-                <AnimatePresence>
-                    {selectedImage && (
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[200] flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
-                            onClick={() => setSelectedImage(null)}
-                        >
-                            <motion.div
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                className="absolute inset-0 bg-black/95 backdrop-blur-3xl"
-                            />
-
-                            <motion.div
-                                initial={{ scale: 0.9, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                exit={{ scale: 0.9, opacity: 0 }}
-                                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                                className="relative max-w-7xl w-full h-full flex items-center justify-center"
-                            >
-                                <img
-                                    src={selectedImage}
-                                    alt="Zoom"
-                                    className="max-w-full max-h-full object-contain rounded-xl shadow-2xl selection:bg-transparent"
-                                />
-
-                                <button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setSelectedImage(null);
-                                    }}
-                                    className="absolute top-0 right-0 p-4 text-white/50 hover:text-white transition-colors"
-                                >
-                                    <X className="w-8 h-8" />
-                                </button>
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+          <div className="flex flex-col gap-4 p-6 md:p-7">
+            <div className="flex flex-wrap items-baseline justify-between gap-3">
+              <h3 className="text-2xl font-semibold text-ink">{t("recognitions.hackathons.items.alegria.name")}</h3>
+              <span className="font-display text-3xl text-brand">{t("recognitions.hackathons.items.alegria.stats")}</span>
             </div>
+            <p className="leading-relaxed text-ink-soft">{t("recognitions.hackathons.items.alegria.description")}</p>
+            <div className="mt-auto">
+              <Gallery
+                images={[alegImg1, alegImg2, alegImg3, alegImg4, alegImg5, alegImg6]}
+                label={t("recognitions.gallery")}
+                onOpen={setZoomed}
+              />
+            </div>
+          </div>
+        </article>
+      </BlurFade>
+
+      <BlurFade inView delay={0.15}>
+        <div className="mt-8 flex flex-wrap items-baseline justify-between gap-2">
+          <h3 className="font-mono text-xs uppercase tracking-[0.16em] text-ink-mute">{t("recognitions.certs.title")}</h3>
+          <p className="text-sm text-ink-mute">{t("recognitions.certs.description")}</p>
         </div>
-    );
+        <ul className="mt-4 grid gap-3 md:grid-cols-2">
+          {certifications.map((cert) => (
+            <li key={cert.name} className="group relative flex gap-3 rounded-xl border border-line bg-surface p-4 transition-colors hover:border-line-strong">
+              <span className="h-12 w-16 shrink-0 overflow-hidden rounded-md border border-line bg-raised">
+                <img src={cert.image} alt="" loading="lazy" className="size-full object-cover object-top" />
+              </span>
+              <span className="min-w-0 flex-1">
+                <a
+                  href={cert.fileUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-semibold leading-snug text-ink transition-colors after:absolute after:inset-0 after:rounded-xl group-hover:text-brand"
+                >
+                  {cert.name}
+                  <span className="sr-only"> — {t("recognitions.view_certificate")}</span>
+                </a>
+                <span className="ml-2 font-mono text-[11px] uppercase tracking-wider text-ink-mute">{cert.origin}</span>
+                <span className="mt-1 line-clamp-2 block text-sm leading-snug text-ink-soft">{cert.description}</span>
+                {cert.photos && (
+                  <button
+                    type="button"
+                    onClick={() => setPhotosOpen(true)}
+                    className="relative z-10 mt-2 inline-flex items-center gap-1.5 text-sm font-medium text-ink-soft hover:text-brand cursor-pointer"
+                  >
+                    <Images className="size-3.5" /> {t("recognitions.photos")} ({cert.photos.length})
+                  </button>
+                )}
+              </span>
+              <ArrowUpRight className="size-4 shrink-0 text-ink-mute transition-colors group-hover:text-brand" />
+            </li>
+          ))}
+        </ul>
+      </BlurFade>
+
+      <Dialog
+        open={photosOpen}
+        onClose={() => setPhotosOpen(false)}
+        label={t("recognitions.hackathons.items.corpoeureka.name")}
+        className="max-w-3xl"
+      >
+        <div className="overflow-y-auto p-6 md:p-8">
+          <p className="font-mono text-xs uppercase tracking-wider text-brand">{t("recognitions.hackathons.items.corpoeureka.badge")}</p>
+          <h3 className="mt-1 pr-12 text-2xl font-semibold text-ink">{t("recognitions.hackathons.items.corpoeureka.name")}</h3>
+          <p className="mt-2 leading-relaxed text-ink-soft">{t("recognitions.hackathons.items.corpoeureka.description")}</p>
+          <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {corpoPhotos.map((src, i) => (
+              <button
+                key={src}
+                type="button"
+                onClick={() => setZoomed(src)}
+                aria-label={`${t("common.enlarge")} ${i + 1}`}
+                className="aspect-[4/3] overflow-hidden rounded-lg border border-line bg-raised cursor-zoom-in"
+              >
+                <img src={src} alt="" loading="lazy" className="size-full object-cover" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </Dialog>
+
+      <Dialog open={videoOpen} onClose={() => setVideoOpen(false)} label={t("recognitions.hackathons.items.alegria.name")} bare className="max-w-5xl">
+        <video src={alegVideo} controls autoPlay playsInline className="aspect-video w-full rounded-xl bg-black" />
+      </Dialog>
+
+      <Dialog open={zoomed !== null} onClose={() => setZoomed(null)} label={t("common.enlarge")} bare className="max-w-6xl">
+        {zoomed && <img src={zoomed} alt="" className="max-h-[85vh] w-full rounded-xl object-contain" />}
+      </Dialog>
+    </div>
+  );
 };
 
 export default Recognitions;
