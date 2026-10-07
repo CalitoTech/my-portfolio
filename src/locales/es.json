@@ -84,8 +84,8 @@
                     "Backend Lead"
                 ],
                 "period": "Fintech / AgroTech",
-                "summary": "Liderazgo en la democratización del crédito agrícola, impactando a miles de productores mediante inclusión financiera digital.",
-                "details": "Como arquitecto fundador, lideré la creación de la infraestructura que hoy permite a más de 5,000 productores acceder a financiamiento sin intereses. Materialicé la visión de 'Agrooberto', un asistente virtual vía WhatsApp que digitalizó el 100% del proceso crediticio, eliminando barreras de liquidez y burocracia. Este ecosistema no solo ha bancarizado a sectores desatendidos, sino que ha impulsado un incremento del 30% en las transacciones de tiendas aliadas, redefiniendo la economía del agro en Venezuela.",
+                "summary": "Liderazgo en la democratización del financiamiento agrícola (BNPL), conectando a más de 50,000 actores de la cadena de valor del agro mediante inclusión financiera digital.",
+                "details": "Como arquitecto fundador, lideré la creación de la infraestructura que hoy permite a más de 50,000 usuarios registrados —productores, ingenieros agrónomos, transportistas y demás actores de la cadena de valor del agro— comprar en cuotas sin intereses en tiendas aliadas. La plataforma ya suma más de US$3 millones en líneas de financiamiento aprobadas y más de US$1 millón en ventas procesadas. Materialicé la visión de 'Agrooberto', un asistente de IA vía WhatsApp que digitalizó el 100% del proceso de financiamiento, desde el registro con KYC hasta la compra, eliminando barreras de liquidez y burocracia. Este ecosistema no solo ha bancarizado a sectores desatendidos, sino que ha impulsado un incremento del 30% en las transacciones de tiendas aliadas, redefiniendo la economía del agro en Venezuela.",
                 "tags": [
                     "Inclusión Financiera",
                     "Fintech Escalable",
@@ -150,7 +150,7 @@
         "items": {
             "crediagro": {
                 "name": "Crediagro Core",
-                "description": "Arquitectura de microservicios para gestión de créditos agrícolas.",
+                "description": "Arquitectura de microservicios para financiamiento agrícola BNPL.",
                 "cta": "Ver arquitectura"
             },
             "agroo": {

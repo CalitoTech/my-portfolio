@@ -84,8 +84,8 @@
                     "Backend Lead"
                 ],
                 "period": "Fintech / AgroTech",
-                "summary": "Leadership in the democratization of agricultural credit, impacting thousands of producers through digital financial inclusion.",
-                "details": "As the founding architect, I led the creation of the infrastructure that now allows more than 5,000 producers to access interest-free financing. I materialized the vision of 'Agrooberto', a virtual assistant via WhatsApp that digitized 100% of the credit process, eliminating liquidity barriers and bureaucracy. This ecosystem has not only provided banking services to underserved sectors but has driven a 30% increase in transactions in partner stores, redefining the agricultural economy in Venezuela.",
+                "summary": "Leadership in the democratization of agricultural financing (BNPL), connecting more than 50,000 actors across the agricultural value chain through digital financial inclusion.",
+                "details": "As the founding architect, I led the creation of the infrastructure that now enables more than 50,000 registered users —farmers, agronomists, transporters and other actors across the agricultural value chain— to buy in interest-free installments at partner stores. The platform has already surpassed US$3 million in approved financing lines and US$1 million in processed sales. I materialized the vision of 'Agrooberto', an AI assistant on WhatsApp that digitized 100% of the financing process, from KYC onboarding to checkout, eliminating liquidity barriers and bureaucracy. This ecosystem has not only provided banking services to underserved sectors but has driven a 30% increase in transactions in partner stores, redefining the agricultural economy in Venezuela.",
                 "tags": [
                     "Financial Inclusion",
                     "Scalable Fintech",
@@ -150,7 +150,7 @@
         "items": {
             "crediagro": {
                 "name": "Crediagro Core",
-                "description": "Microservices architecture for agricultural credit management.",
+                "description": "Microservices architecture for agricultural BNPL financing.",
                 "cta": "View architecture"
             },
             "agroo": {
