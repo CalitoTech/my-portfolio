@@ -19,19 +19,19 @@ function App() {
         <Hero />
       </section>
 
-      <section id="experience" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-2 pb-12">
+      <section id="experience" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-2 pb-12 md:py-12">
         <Experience />
       </section>
 
-      <section id="about" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-10 pb-8">
+      <section id="about" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-10 pb-8 md:py-12">
         <About />
       </section>
 
-      <section id="recognitions" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-2 pb-4 px-6">
+      <section id="recognitions" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-2 pb-4 px-6 md:py-12">
         <Recognitions />
       </section>
 
-      <section id="services" className="relative min-h-screen md:h-screen w-full flex items-start justify-center md:snap-start z-10 pt-0 pb-4 px-6">
+      <section id="services" className="relative min-h-screen md:h-screen w-full flex items-start md:items-center-safe justify-center md:snap-start z-10 pt-0 pb-32 px-6 md:pt-12 md:pb-32">
         <Services />
       </section>
 

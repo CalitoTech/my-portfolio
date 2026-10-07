@@ -8,7 +8,7 @@ const Hero = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="relative z-10 flex flex-col items-center px-6 text-center w-full max-w-4xl">
+    <div className="z-10 flex flex-col items-center px-6 text-center w-full max-w-4xl">
       {/* 1. Badge Superior */}
       <BlurFade delay={0.2} inView>
         <div className="mb-10 flex items-center gap-3 rounded-full border border-white/5 bg-white/5 px-5 py-2 backdrop-blur-md">
@@ -64,9 +64,9 @@ const Hero = () => {
         </p>
       </BlurFade>
 
-      <BlurFade delay={1} inView>
-        <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
-          <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-500">{t('hero.scroll')}</p>
+      <BlurFade delay={1} inView className="absolute bottom-8 left-1/2 -translate-x-1/2">
+        <div className="flex flex-col items-center gap-2 opacity-50 animate-bounce">
+          <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-slate-500 whitespace-nowrap">{t('hero.scroll')}</p>
           <ChevronDown className="h-5 w-5 text-blue-500" />
         </div>
       </BlurFade>

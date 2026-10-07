@@ -118,7 +118,7 @@ const Services = () => {
     ];
 
     return (
-        <div className="relative z-20 max-w-6xl w-full flex flex-col items-center pt-0">
+        <div className="z-20 max-w-6xl w-full flex flex-col items-center pt-0">
             <BlurFade delay={0.1} inView>
                 <div className="text-center mb-4">
                     <Badge variant="outline" className="mb-4 border-white/10 bg-white/5 text-blue-400 uppercase tracking-[0.4em] font-bold px-4 py-1 text-[10px]">
@@ -138,7 +138,7 @@ const Services = () => {
                 </BentoGrid>
             </BlurFade>
 
-            <BlurFade delay={0.3} inView>
+            <BlurFade delay={0.3} inView className="absolute bottom-6 left-1/2 -translate-x-1/2">
                 <motion.div
                     animate={{
                         x: [0, -2, 2, -2, 2, 0],
